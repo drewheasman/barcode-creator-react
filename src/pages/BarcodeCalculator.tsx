@@ -24,7 +24,7 @@ export function BarcodeCalculator() {
   const onBarcodeTypeChange: CalculateFromBarcodeType = (
     barcodeType: BarcodeType
   ) => {
-    setBarcodeType(barcodeType as BarcodeType);
+    setBarcodeType(barcodeType);
   };
 
   const onInputTextChange: CalculateFromInputText = (inputText: string) => {

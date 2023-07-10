@@ -2,7 +2,7 @@ import { CalculatedCheckDigit } from "../../interface/CalculatedCheckDigit";
 import { MessageLevel } from "../../interface/Message";
 
 export function calculateEan(input: string): CalculatedCheckDigit {
-  if (input === "" || new RegExp("[^0-9]").test(input)) {
+  if (input === "" || /\D/.test(input)) {
     return {
       checkDigit: "",
       message: {

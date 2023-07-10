@@ -3,9 +3,9 @@ import { stopChar } from "./Characters";
 export function code128Lines(data: number[]) {
   let lines = "";
 
-  for (let i = 0; i < data.length; i++) {
-    lines += linesMap[data[i]];
-    if (data[i] === stopChar) {
+  for (const element of data) {
+    lines += linesMap[element];
+    if (element === stopChar) {
       break;
     }
   }

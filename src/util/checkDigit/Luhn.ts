@@ -27,8 +27,8 @@ export function calculateLuhn(input: string): CalculatedCheckDigit {
 
   // Sum digits
   let checkDigit = 0;
-  for (let i = 0; i < calcArray.length; i++) {
-    checkDigit += calcArray[i];
+  for (const element of calcArray) {
+    checkDigit += element;
   }
 
   // *9 mod 10
@@ -37,7 +37,7 @@ export function calculateLuhn(input: string): CalculatedCheckDigit {
 
 function mapLuhnCharacter(char: string) {
   const luhnChar = luhnMap[char];
-  return luhnChar === undefined ? 0 : luhnChar;
+  return luhnChar ?? 0;
 }
 
 const luhnMap: { [key: string]: number } = {

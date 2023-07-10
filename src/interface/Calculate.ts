@@ -1,13 +1,7 @@
 import { BarcodeType } from "../enum/BarcodeType";
 
-export interface CalculateFromBarcodeType {
-  (barcodeType: BarcodeType): void;
-}
+export type CalculateFromBarcodeType = (barcodeType: BarcodeType) => void;
 
-export interface CalculateFromCheckDigit {
-  (checkDigitChecked: boolean): void;
-}
+export type CalculateFromCheckDigit = (checkDigitChecked: boolean) => void;
 
-export interface CalculateFromInputText {
-  (inputText: string): void;
-}
+export type CalculateFromInputText = (inputText: string) => void;
