@@ -1,5 +1,5 @@
 export function code128Characters(input: string): number[] {
-  const numericInput: boolean = !new RegExp("[^0-9]").test(input);
+  const numericInput: boolean = !/\D/.test(input);
 
   let characters: number[];
   if (numericInput && input.length > 1) {
@@ -30,9 +30,8 @@ function charactersCodeC(input: string) {
   for (let i = 0; i < input.length; i++) {
     // 2 characters at a time
     if (i + 1 < input.length) {
-      let c = parseInt(input[i] + input[i + 1]);
+      let c = parseInt(input[i] + input[++i]);
       characters.push(c);
-      i++;
     }
     // If one character left
     if (i + 1 === input.length && input.length % 2 !== 0) {
@@ -59,9 +58,7 @@ function checkDigit(input: number[]) {
 // Special characters not in map
 const startC = 105;
 const startB = 104;
-// const abToC = 99; // Not currently used
 const cToB = 100;
-// const cToA = 101; // Not currently used
 export const stopChar = 106;
 
 const codeBMap: { [key: string]: number } = {

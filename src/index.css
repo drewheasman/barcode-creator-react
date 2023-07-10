@@ -39,7 +39,7 @@ input {
   border-color: var(--color-medium);
   border-style: solid;
   vertical-align: middle;
-  font-family: "Segoe UI";
+  font-family: var(--font-family);
   border-radius: var(--border-radius);
 }
 input:focus {
