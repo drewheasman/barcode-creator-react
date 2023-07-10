@@ -20,12 +20,6 @@ jobs:
       - run: npm run build
       - run: npm test -- --watchAll=false
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: /opt/sonar-scanner/.sonar/cache
-          key: sonar-cache
-          restore-keys: sonar-cache
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
