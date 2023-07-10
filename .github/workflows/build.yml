@@ -23,9 +23,9 @@ jobs:
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+          path: /opt/sonar-scanner/.sonar/cache
+          key: sonar-cache
+          restore-keys: sonar-cache
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
