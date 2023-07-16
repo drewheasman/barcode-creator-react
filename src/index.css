@@ -254,7 +254,7 @@ option:hover {
   margin-left: 1.5rem;
 }
 .header-logo {
-  color: #191a19c3;
+  color: var(--color-dark);
   margin-left: auto;
   margin-right: 1.5rem;
 }
