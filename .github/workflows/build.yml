@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [main]
+    branches: [main, deploy]
   pull_request:
     branches: [main]
 jobs:
@@ -135,5 +135,6 @@ jobs:
         run: terraform apply -auto-approve -input=false
 
       - name: Deploy file to s3
+        working-directory: ./
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: aws s3 sync ./dist s3://create-barcodes
