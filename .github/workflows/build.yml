@@ -27,6 +27,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Archive dist
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
   deploy:
     needs: build
     name: "Deploy"
@@ -45,6 +51,9 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
 
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v1
