@@ -27,9 +27,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  deploy-infrastructure:
+  deploy:
     needs: build
-    name: "Deploy infrastructure"
+    name: "Deploy"
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -63,7 +63,7 @@ jobs:
         env:
           AWS_BUCKET_NAME: ${{ secrets.TF_AWS_BUCKET_NAME }}
           AWS_BUCKET_KEY_NAME: ${{ secrets.TF_AWS_BUCKET_KEY_NAME }}
-        run: terraform init -backend-config="bucket=${TF_AWS_BUCKET_NAME}" -backend-config="key=${TF_AWS_BUCKET_KEY}" -backend-config="region=${AWS_REGION}"
+        run: terraform init -backend-config="bucket=${{ secrets.TF_AWS_BUCKET_NAME }}" -backend-config="key=${{ secrets.TF_AWS_BUCKET_KEY }}" -backend-config="region=${AWS_REGION}"
 
       - name: Terraform Validate
         id: validate
@@ -118,16 +118,7 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
-  deploy-code:
-    needs: deploy-infrastructure
-    name: "Deploy code"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Configure AWS credentials from AWS account
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.TF_AWS_ROLE }}
-          aws-region: ${{ secrets.AWS_REGION }}
-          role-session-name: GitHub-OIDC-SYNC
+
       - name: Deploy file to s3
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: aws s3 sync ./dist s3://create-barcodes
