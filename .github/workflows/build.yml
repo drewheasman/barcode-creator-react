@@ -8,7 +8,8 @@ jobs:
     name: "Build and test"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Git checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Sonar
       - name: Use Node.js
@@ -40,7 +41,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./tf
+        working-directory: ./.tf
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
