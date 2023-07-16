@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [main, deploy]
+    branches: [main]
   pull_request:
     branches: [main]
 jobs:
@@ -22,11 +22,11 @@ jobs:
       - run: npm run build
       - run: npm test -- --watchAll=false
 
-      # - name: SonarCloud Scan
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Archive dist
         uses: actions/upload-artifact@v3
@@ -136,5 +136,5 @@ jobs:
 
       - name: Deploy file to s3
         working-directory: ./
-        if: github.ref == 'refs/heads/deploy' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: aws s3 sync ./dist s3://create-barcodes
