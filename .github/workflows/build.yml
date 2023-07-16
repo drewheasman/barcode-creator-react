@@ -40,7 +40,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: .
+        working-directory: ./tf
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
@@ -56,11 +56,9 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-        working-directory: ./tf
 
       - name: Terraform Init
         id: init
-        working-directory: ./tf
         env:
           AWS_BUCKET_NAME: ${{ secrets.TF_AWS_BUCKET_NAME }}
           AWS_BUCKET_KEY_NAME: ${{ secrets.TF_AWS_BUCKET_KEY_NAME }}
@@ -68,18 +66,15 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        working-directory: ./tf
         run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
-        working-directory: ./tf
         run: terraform plan -no-color
         if: github.event_name == 'pull_request'
         continue-on-error: true
 
       - uses: actions/github-script@v6
-        working-directory: ./tf
         if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
@@ -116,7 +111,6 @@ jobs:
             })
 
       - name: Terraform Plan Status
-        working-directory: ./tf
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
