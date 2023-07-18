@@ -1,4 +1,4 @@
-export function code93CheckCharacter(data: string) {
+export function code93CheckCharacters(data: string) {
   let checkCharacters = cCheckCharacter(data);
   checkCharacters += kCheckCharacter(data + checkCharacters);
 
@@ -6,11 +6,30 @@ export function code93CheckCharacter(data: string) {
 }
 
 function cCheckCharacter(data: string) {
-  return "TODO";
+  const checkDigit = weightCharacters(data, 20);
+  return reverseCharacterWeightMap()[checkDigit % 47];
 }
 
 function kCheckCharacter(data: string) {
-  return "TODO";
+  const checkDigit = weightCharacters(data, 15);
+  return reverseCharacterWeightMap()[checkDigit % 47];
+}
+
+function weightCharacters(data: string, maxWeight: number) {
+  let characterWeight = 0;
+
+  let weight = 1;
+  for (let i = data.length - 1; i >= 0; i--) {
+    if (weight > maxWeight) {
+      weight = 1;
+    }
+
+    characterWeight += characterWeightMap[data.charAt(i)] * weight;
+
+    weight++;
+  }
+
+  return characterWeight;
 }
 
 const characterWeightMap: { [key: string]: number } = {
@@ -71,4 +90,9 @@ const reverseCharacterWeightMap = () => {
   });
 
   return reversedMap;
+};
+
+export const testExport = {
+  cCheckCharacter,
+  kCheckCharacter,
 };

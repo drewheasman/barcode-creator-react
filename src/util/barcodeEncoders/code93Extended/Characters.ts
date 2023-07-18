@@ -1,4 +1,4 @@
-import { code93CheckCharacter } from "../code93/CheckCharacter";
+import { code93CheckCharacters } from "../code93/CheckCharacters";
 
 export function code93ExtendedCharacters(input: string) {
   let characters = "";
@@ -7,7 +7,7 @@ export function code93ExtendedCharacters(input: string) {
     characters += code93ExtendedMap[input.charAt(i)];
   }
 
-  characters += code93CheckCharacter(characters);
+  characters += code93CheckCharacters(characters);
 
   return `*${characters}*`;
 }
