@@ -10,7 +10,7 @@ export function encodeCode39(data: string) {
   data = data.toUpperCase();
 
   if (invalidInput(data, "0-9A-Z-.$/+% ")) {
-    returnData.messages = [invalidCharactersMessage];
+    returnData.messages.push(invalidCharactersMessage);
     return returnData;
   }
 

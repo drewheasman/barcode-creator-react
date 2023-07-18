@@ -1,11 +1,46 @@
-export function ean13Lines(data: string) {
-  let lines = "";
+import { eanGMap, eanLMap, eanRMap } from "../eanCommon/EanLines";
 
-  // TODO: return the lines
+export function ean13Lines(data: string) {
+  const startLines = "0001010";
+  const middleLines = "01010";
+  const endLines = "1010000";
+
+  let lines = startLines;
+
+  const middleStructure = structureMap[data.charAt(0)];
+
+  for (let i = 0; i < 6; i++) {
+    if (middleStructure.charAt(i) === "L") {
+      lines += eanLMap[data.charAt(i + 1)];
+    } else if (middleStructure.charAt(i) === "G") {
+      lines += eanGMap[data.charAt(i + 1)];
+    }
+  }
+
+  lines += middleLines;
+
+  for (let i = 7; i < 13; i++) {
+    lines += eanRMap[data.charAt(i)];
+  }
+
+  lines += endLines;
 
   return lines;
 }
 
-const linesMap: { [key: number]: string } = {
-  0: "",
+const structureMap: { [key: string]: string } = {
+  "0": "LLLLLL",
+  "1": "LLGLGG",
+  "2": "LLGGLG",
+  "3": "LLGGGL",
+  "4": "LGLLGG",
+  "5": "LGGLLG",
+  "6": "LGGGLL",
+  "7": "LGLGLG",
+  "8": "LGLGGL",
+  "9": "LGGLGL",
+};
+
+export const testExport = {
+  structureMap,
 };

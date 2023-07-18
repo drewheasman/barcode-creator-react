@@ -11,7 +11,7 @@ export function encodeCode93Extended(data: string) {
   if (
     invalidInput(data, "0-9A-Za-z!\"#$%&'()*+,-./;:<=>?@\\[\\]\\\\^_`{|} ~")
   ) {
-    returnData.messages = [invalidCharactersMessage];
+    returnData.messages.push(invalidCharactersMessage);
     return returnData;
   }
 

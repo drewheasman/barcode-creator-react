@@ -26,3 +26,17 @@ export const UPCAInvalidCharactersMessage: Message = {
   level: MessageLevel.Warn,
   message: "Could not calculate UPC-A check digit for non-numeric data",
 };
+
+export const paddedDataMessage = (typeName: string, length: number) => {
+  return {
+    level: MessageLevel.Warn,
+    message: `Input padded, ${typeName} barcodes have input length ${length}`,
+  };
+};
+
+export const truncatedDataMessage = (typeName: string, length: number) => {
+  return {
+    level: MessageLevel.Warn,
+    message: `Input truncated, ${typeName} barcodes have max input length ${length}`,
+  };
+};

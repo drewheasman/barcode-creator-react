@@ -5,11 +5,11 @@ import { itfLines } from "./Lines";
 import { BarcodeType } from "../../../enum/BarcodeType";
 import { getInitialData } from "../../Constants";
 
-export function encodeCode39(data: string) {
+export function encodeITF(data: string) {
   const returnData: CalculatedBarcodeData = getInitialData();
 
   if (invalidNumericInput(data)) {
-    returnData.messages = [numericOnlyMessage(BarcodeType.ITF)];
+    returnData.messages.push(numericOnlyMessage(BarcodeType.ITF));
     return returnData;
   }
 
