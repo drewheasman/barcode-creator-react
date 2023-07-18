@@ -8,7 +8,9 @@ import { code128Lines } from "./Lines";
 export function encodeCode128(data: string) {
   const returnData: CalculatedBarcodeData = getInitialData();
 
-  if (invalidInput(data, "0-9A-Za-z !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")) {
+  if (
+    invalidInput(data, "0-9A-Za-z !\"#$%&'()*+,-./:;<=>?@\\[\\]\\\\^_`{|}~")
+  ) {
     returnData.messages = [invalidCharactersMessage];
 
     return returnData;

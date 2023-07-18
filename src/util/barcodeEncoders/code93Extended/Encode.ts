@@ -2,12 +2,13 @@ import { CalculatedBarcodeData } from "../../../interface/CalculatedBarcodeData"
 import { getInitialData } from "../../Constants";
 import { invalidCharactersMessage } from "../../Messages";
 import { invalidInput } from "../InvalidInput";
+import { code93ExtendedCharacters } from "./Characters";
 import { code93ExtendedLines } from "./Lines";
 
-export function encodeCode39(data: string) {
+export function encodeCode93(data: string) {
   const returnData: CalculatedBarcodeData = getInitialData();
 
-  if (invalidInput(data, "0-9A-Za-z!\"#$%&'()*+,-./;:<=>?@[]\\^_`{} ~")) {
+  if (invalidInput(data, "0-9A-Za-z!\"#$%&'()*+,-./;:<=>?@\\[\\]\\\\^_`{} ~")) {
     returnData.messages = [invalidCharactersMessage];
     return returnData;
   }
@@ -15,7 +16,9 @@ export function encodeCode39(data: string) {
   returnData.outputString = data;
   returnData.outputLength = returnData.outputString.length.toString();
   returnData.barcodeText = data;
-  returnData.barcodeLinesBits = code93ExtendedLines(data);
+  returnData.barcodeLinesBits = code93ExtendedLines(
+    code93ExtendedCharacters(data)
+  );
 
   return returnData;
 }
