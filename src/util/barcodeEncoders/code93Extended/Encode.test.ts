@@ -1,8 +1,8 @@
 import { MessageLevel } from "../../../enum/MessageLevel";
-import { encodeCode93 } from "./Encode";
+import { encodeCode93Extended } from "./Encode";
 
 test("Code 93 extended encode success", () => {
-  expect(encodeCode93("Code 93 Extended")).toStrictEqual({
+  expect(encodeCode93Extended("Code 93 Extended")).toStrictEqual({
     outputString: "Code 93 Extended",
     outputLength: "16",
     barcodeLinesBits:
@@ -10,7 +10,7 @@ test("Code 93 extended encode success", () => {
     barcodeText: "Code 93 Extended",
     messages: [],
   });
-  expect(encodeCode93("!\"#&'()*+,:;<=>?@[\\]abc{|} ~")).toStrictEqual({
+  expect(encodeCode93Extended("!\"#&'()*+,:;<=>?@[\\]abc{|} ~")).toStrictEqual({
     outputString: "!\"#&'()*+,:;<=>?@[\\]abc{|} ~",
     outputLength: "28",
     barcodeLinesBits:
@@ -21,7 +21,7 @@ test("Code 93 extended encode success", () => {
 });
 
 test("Code 93 extended encode invalid characters", () => {
-  expect(encodeCode93("Code 93 Extended¬")).toStrictEqual({
+  expect(encodeCode93Extended("Code 93 Extended¬")).toStrictEqual({
     outputString: "",
     outputLength: "",
     barcodeLinesBits: "",

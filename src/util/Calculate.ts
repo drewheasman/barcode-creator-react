@@ -3,7 +3,7 @@ import { Message } from "../interface/Message";
 import { calculateFailMessage, cannotProcessTypeMessage } from "./Messages";
 import { encodeCode128 } from "./barcodeEncoders/code128/Encode";
 import { encodeCode39 } from "./barcodeEncoders/code39/Encode";
-import { encodeCode93 } from "./barcodeEncoders/code93Extended/Encode";
+import { encodeCode93Extended } from "./barcodeEncoders/code93Extended/Encode";
 import { calculateEan } from "./checkDigit/Ean";
 import { calculateLuhn } from "./checkDigit/Luhn";
 import { BarcodeType } from "../enum/BarcodeType";
@@ -46,7 +46,7 @@ export function calculateBarcodeData(
         returnData = encodeCode39(data);
         break;
       case BarcodeType.Code93Extended:
-        returnData = encodeCode93(data);
+        returnData = encodeCode93Extended(data);
         break;
       case BarcodeType.EAN13:
       case BarcodeType.EAN8:

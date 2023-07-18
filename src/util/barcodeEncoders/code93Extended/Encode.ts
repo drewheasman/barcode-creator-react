@@ -5,7 +5,7 @@ import { invalidInput } from "../InvalidInput";
 import { code93ExtendedCharacters } from "./Characters";
 import { code93ExtendedLines } from "./Lines";
 
-export function encodeCode93(data: string) {
+export function encodeCode93Extended(data: string) {
   const returnData: CalculatedBarcodeData = getInitialData();
 
   if (
