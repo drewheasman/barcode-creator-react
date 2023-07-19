@@ -1,38 +1,38 @@
 on:
   push:
-    branches: [main]
+    branches: [main, invalidate-cdn]
   pull_request:
     branches: [main]
 jobs:
-  build:
-    name: "Build and test"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Git checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Sonar
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-          cache: "npm"
+  # build:
+  #   name: "Build and test"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Git checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0 # Sonar
+  #     - name: Use Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "18.x"
+  #         cache: "npm"
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm test -- --watchAll=false
+  #     - run: npm ci
+  #     - run: npm run build
+  #     - run: npm test -- --watchAll=false
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #     - name: SonarCloud Scan
+  #       uses: SonarSource/sonarcloud-github-action@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Archive dist
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: dist
+  #     - name: Archive dist
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: dist
+  #         path: dist
   deploy:
     needs: build
     name: "Deploy"
@@ -131,16 +131,16 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           terraform apply -auto-approve -input=false
           echo "DISTRIBUTION_ID=$(terraform output distribution_id)" >> "$GITHUB_ENV"
 
-      - name: Deploy file to s3
-        working-directory: ./
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: aws s3 sync ./dist s3://create-barcodes
-
+      # - name: Deploy file to s3
+      #   working-directory: ./
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: aws s3 sync ./dist s3://create-barcodes
       - name: Invalidate Cloudfront cache
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: aws cloudfront create-invalidation --distribution-id=$DISTRIBUTION_ID --paths '/*'
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: echo $DISTRIBUTION_ID
+        # run: aws cloudfront create-invalidation --distribution-id=$DISTRIBUTION_ID --paths '/*'
