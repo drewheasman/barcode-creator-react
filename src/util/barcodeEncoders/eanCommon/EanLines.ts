@@ -1,3 +1,7 @@
+export const startLines = "0001010";
+export const middleLines = "01010";
+export const endLines = "1010000";
+
 export const eanLMap: { [key: string]: string } = {
   "0": "0001101",
   "1": "0011001",
