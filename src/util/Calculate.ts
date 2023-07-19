@@ -9,6 +9,7 @@ import { calculateLuhn } from "./checkDigit/Luhn";
 import { BarcodeType } from "../enum/BarcodeType";
 import { getInitialData } from "./Constants";
 import { encodeEan13 } from "./barcodeEncoders/ean13/Encode";
+import { encodeEan8 } from "./barcodeEncoders/ean8/Encode";
 
 export function calculateBarcodeData(
   data: string,
@@ -53,6 +54,8 @@ export function calculateBarcodeData(
         returnData = encodeEan13(data);
         break;
       case BarcodeType.EAN8:
+        returnData = encodeEan8(data);
+        break;
       case BarcodeType.ITF:
       case BarcodeType.NW7:
       default:

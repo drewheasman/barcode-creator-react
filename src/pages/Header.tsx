@@ -1,7 +1,7 @@
 export function Header() {
   return (
     <header className="header">
-      <h1 className="header-name">Barcode Creator</h1>
+      <h1 className="header-name">Create Barcodes</h1>
       <a
         className="header-logo"
         href="https://github.com/drewheasman/barcode-creator-react"

@@ -1,10 +1,13 @@
-import { eanGMap, eanLMap, eanRMap } from "../eanCommon/EanLines";
+import {
+  eanGMap,
+  eanLMap,
+  eanRMap,
+  endLines,
+  middleLines,
+  startLines,
+} from "../eanCommon/EanLines";
 
 export function ean13Lines(data: string) {
-  const startLines = "0001010";
-  const middleLines = "01010";
-  const endLines = "1010000";
-
   let lines = startLines;
 
   const middleStructure = structureMap[data.charAt(0)];
