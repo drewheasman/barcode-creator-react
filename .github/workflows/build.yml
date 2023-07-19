@@ -134,7 +134,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           terraform apply -auto-approve -input=false
-          echo "DISTRIBUTION_ID=$(terraform output distribution_id)" >> "$GITHUB_ENV"
+          echo "DISTRIBUTION_ID=$(terraform output -raw distribution_id)" >> "$GITHUB_ENV"
 
       - name: Deploy file to s3
         working-directory: ./
