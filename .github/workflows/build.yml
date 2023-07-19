@@ -56,7 +56,7 @@ jobs:
         uses: actions/download-artifact@v3
 
       - name: Configure AWS credentials from AWS account
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2.2
         with:
           role-to-assume: ${{ secrets.TF_AWS_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
@@ -132,9 +132,15 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: |
+          terraform apply -auto-approve -input=false
+          echo "DISTRIBUTION_ID=$(terraform output distribution_id)" >> "$GITHUB_ENV"
 
       - name: Deploy file to s3
         working-directory: ./
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: aws s3 sync ./dist s3://create-barcodes
+
+      - name: Invalidate Cloudfront cache
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: aws cloudfront create-invalidation --distribution-id=$DISTRIBUTION_ID
