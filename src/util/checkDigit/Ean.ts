@@ -1,7 +1,7 @@
 import { CalculatedCheckDigit } from "../../interface/CalculatedCheckDigit";
 import { MessageLevel } from "../../interface/Message";
 
-export function calculateEan(input: string): CalculatedCheckDigit {
+export function calculateEanCheckDigit(input: string): CalculatedCheckDigit {
   if (input === "" || /\D/.test(input)) {
     return {
       checkDigit: "",

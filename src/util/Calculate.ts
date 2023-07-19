@@ -4,10 +4,11 @@ import { calculateFailMessage, cannotProcessTypeMessage } from "./Messages";
 import { encodeCode128 } from "./barcodeEncoders/code128/Encode";
 import { encodeCode39 } from "./barcodeEncoders/code39/Encode";
 import { encodeCode93Extended } from "./barcodeEncoders/code93Extended/Encode";
-import { calculateEan } from "./checkDigit/Ean";
+import { calculateEanCheckDigit } from "./checkDigit/Ean";
 import { calculateLuhn } from "./checkDigit/Luhn";
 import { BarcodeType } from "../enum/BarcodeType";
 import { getInitialData } from "./Constants";
+import { encodeEan13 } from "./barcodeEncoders/ean13/Encode";
 
 export function calculateBarcodeData(
   data: string,
@@ -30,7 +31,7 @@ export function calculateBarcodeData(
     }
   }
   if (ucpa) {
-    const upcaCheck = calculateEan(data);
+    const upcaCheck = calculateEanCheckDigit(data);
     data += upcaCheck.checkDigit;
     if (upcaCheck.message) {
       checkDigitMessages.push(upcaCheck.message);
@@ -49,6 +50,8 @@ export function calculateBarcodeData(
         returnData = encodeCode93Extended(data);
         break;
       case BarcodeType.EAN13:
+        returnData = encodeEan13(data);
+        break;
       case BarcodeType.EAN8:
       case BarcodeType.ITF:
       case BarcodeType.NW7:

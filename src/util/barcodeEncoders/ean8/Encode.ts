@@ -5,11 +5,11 @@ import { ean8Lines } from "./Lines";
 import { BarcodeType } from "../../../enum/BarcodeType";
 import { getInitialData } from "../../Constants";
 
-export function encodeCode39(data: string) {
+export function encodeEan8(data: string) {
   const returnData: CalculatedBarcodeData = getInitialData();
 
   if (invalidNumericInput(data)) {
-    returnData.messages = [numericOnlyMessage(BarcodeType.EAN8)];
+    returnData.messages.push(numericOnlyMessage(BarcodeType.EAN8));
     return returnData;
   }
 

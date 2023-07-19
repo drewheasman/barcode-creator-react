@@ -1,5 +1,5 @@
 import { MessageLevel } from "../../interface/Message";
-import { calculateEan, testExport } from "./Ean";
+import { calculateEanCheckDigit, testExport } from "./Ean";
 
 test("Weight and sum", () => {
   expect(testExport.weightAndSum([2, 3, 4])).toBe(21);
@@ -7,10 +7,16 @@ test("Weight and sum", () => {
 });
 
 test("Calculate EAN check digit", () => {
-  expect(calculateEan("03600024145")).toStrictEqual({ checkDigit: "7" });
-  expect(calculateEan("123231123")).toStrictEqual({ checkDigit: "0" });
-  expect(calculateEan("501234567421")).toStrictEqual({ checkDigit: "6" });
-  expect(calculateEan("501234567421A")).toStrictEqual({
+  expect(calculateEanCheckDigit("03600024145")).toStrictEqual({
+    checkDigit: "7",
+  });
+  expect(calculateEanCheckDigit("123231123")).toStrictEqual({
+    checkDigit: "0",
+  });
+  expect(calculateEanCheckDigit("501234567421")).toStrictEqual({
+    checkDigit: "6",
+  });
+  expect(calculateEanCheckDigit("501234567421A")).toStrictEqual({
     checkDigit: "",
     message: {
       level: MessageLevel.Warn,
