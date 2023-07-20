@@ -139,7 +139,7 @@ jobs:
       - name: Deploy file to s3
         working-directory: ./
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: aws s3 sync ./dist s3://create-barcodes
+        run: aws s3 sync ./dist s3://create-barcodes --delete
 
       - name: Invalidate Cloudfront cache
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
