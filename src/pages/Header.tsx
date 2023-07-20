@@ -5,6 +5,7 @@ export function Header() {
       <a
         className="header-logo"
         href="https://github.com/drewheasman/barcode-creator-react"
+        aria-label="View the source code in Github"
       >
         <svg height="100%" viewBox="0 0 16 16" width="32">
           <filter id="inset-shadow">

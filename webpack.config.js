@@ -9,6 +9,7 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     path: __dirname + "/dist/",
+    filename: "[name].[contenthash].js",
   },
   module: {
     rules: [
@@ -39,6 +40,8 @@ module.exports = {
         { from: "./public/logo512.png" },
       ],
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
   ],
 };
