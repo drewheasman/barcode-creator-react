@@ -10,6 +10,7 @@ import { BarcodeType } from "../enum/BarcodeType";
 import { getInitialData } from "./Constants";
 import { encodeEan13 } from "./barcodeEncoders/ean13/Encode";
 import { encodeEan8 } from "./barcodeEncoders/ean8/Encode";
+import { encodeITF } from "./barcodeEncoders/itf/Encode";
 
 export function calculateBarcodeData(
   data: string,
@@ -57,6 +58,8 @@ export function calculateBarcodeData(
         returnData = encodeEan8(data);
         break;
       case BarcodeType.ITF:
+        returnData = encodeITF(data);
+        break;
       case BarcodeType.NW7:
       default:
         returnData.messages.push(cannotProcessTypeMessage);

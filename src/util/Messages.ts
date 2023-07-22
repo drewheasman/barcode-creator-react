@@ -34,6 +34,13 @@ export const paddedDataMessage = (typeName: string, length: number) => {
   };
 };
 
+export const paddedEvenDataMessage = (typeName: string) => {
+  return {
+    level: MessageLevel.Warn,
+    message: `Input padded, ${typeName} barcodes have input length that is even`,
+  };
+};
+
 export const truncatedDataMessage = (typeName: string, length: number) => {
   return {
     level: MessageLevel.Warn,

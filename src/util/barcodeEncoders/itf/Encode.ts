@@ -1,5 +1,5 @@
 import { CalculatedBarcodeData } from "../../../interface/CalculatedBarcodeData";
-import { numericOnlyMessage } from "../../Messages";
+import { numericOnlyMessage, paddedEvenDataMessage } from "../../Messages";
 import { invalidNumericInput } from "../InvalidInput";
 import { itfLines } from "./Lines";
 import { BarcodeType } from "../../../enum/BarcodeType";
@@ -11,6 +11,11 @@ export function encodeITF(data: string) {
   if (invalidNumericInput(data)) {
     returnData.messages.push(numericOnlyMessage(BarcodeType.ITF));
     return returnData;
+  }
+
+  if (data.length % 2 != 0) {
+    data = "0" + data;
+    returnData.messages.push(paddedEvenDataMessage(BarcodeType.ITF));
   }
 
   returnData.outputString = data;
