@@ -72,7 +72,7 @@ export const truncatedDataMessage = (typeName: string, length: number) => {
 
 export const dataTooShortMessage = (typeName: string, length: number) => {
   return {
-    level: MessageLevel.Warn,
+    level: MessageLevel.Error,
     message: `${typeName} barcodes have min input length ${length}`,
   };
 };
