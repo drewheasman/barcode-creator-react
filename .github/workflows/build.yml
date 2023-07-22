@@ -36,7 +36,7 @@ jobs:
       - name: Archive dist
         uses: actions/upload-artifact@v3
         with:
-          name: app/dist
+          name: dist
           path: app/dist
   deploy:
     needs: build
@@ -142,7 +142,7 @@ jobs:
       - name: Deploy file to s3
         working-directory: ./
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: aws s3 sync ./app/dist s3://create-barcodes --delete
+        run: aws s3 sync ./dist s3://create-barcodes --delete
 
       - name: Invalidate Cloudfront cache
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
