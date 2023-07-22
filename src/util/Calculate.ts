@@ -11,6 +11,7 @@ import { getInitialData } from "./Constants";
 import { encodeEan13 } from "./barcodeEncoders/ean13/Encode";
 import { encodeEan8 } from "./barcodeEncoders/ean8/Encode";
 import { encodeITF } from "./barcodeEncoders/itf/Encode";
+import { encodeNW7 } from "./barcodeEncoders/nw7/Encode";
 
 export function calculateBarcodeData(
   data: string,
@@ -61,6 +62,8 @@ export function calculateBarcodeData(
         returnData = encodeITF(data);
         break;
       case BarcodeType.NW7:
+        returnData = encodeNW7(data);
+        break;
       default:
         returnData.messages.push(cannotProcessTypeMessage);
     }
