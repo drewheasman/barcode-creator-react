@@ -3,6 +3,7 @@ import { CalculatedBarcodeData } from "../../../interface/CalculatedBarcodeData"
 import { MessageLevel } from "../../../interface/Message";
 import { getInitialData } from "../../Constants";
 import {
+  dataTooShortMessage,
   invalidDataCharactersMessage,
   invalidStartStopCharactersMessage,
 } from "../../Messages";
@@ -16,6 +17,11 @@ export function encodeNW7(data: string) {
     returnData.messages.push(
       invalidStartStopCharactersMessage(BarcodeType.NW7, "ABCDENT*")
     );
+    return returnData;
+  }
+
+  if (data.length < 3) {
+    returnData.messages.push(dataTooShortMessage(BarcodeType.NW7, 3));
     return returnData;
   }
 
