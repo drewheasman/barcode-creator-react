@@ -129,12 +129,10 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        # run: |
-        #   terraform apply -auto-approve -input=false
-        #   echo "DISTRIBUTION_ID=$(terraform output -raw distribution_id)" >> "$GITHUB_ENV"
-        id: apply
-        run: terraform apply -auto-approve -input=false
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          terraform apply -auto-approve -input=false
+          echo "DISTRIBUTION_ID=$(terraform-bin output -raw distribution_id)" >> "$GITHUB_ENV"
 
       - name: Deploy file to s3
         working-directory: ./
@@ -143,4 +141,4 @@ jobs:
 
       - name: Invalidate Cloudfront cache
         # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: aws cloudfront create-invalidation --distribution-id=${{ steps.apply.outputs.distribution_id }} --paths '/*'
+        run: aws cloudfront create-invalidation --distribution-id=$DISTRIBUTION_ID --paths '/*'
