@@ -1,6 +1,5 @@
 import { BarcodeType } from "../../../enum/BarcodeType";
 import { CalculatedBarcodeData } from "../../../interface/CalculatedBarcodeData";
-import { MessageLevel } from "../../../interface/Message";
 import { getInitialData } from "../../Constants";
 import {
   dataTooShortMessage,
