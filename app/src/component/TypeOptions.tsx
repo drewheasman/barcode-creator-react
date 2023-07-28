@@ -12,7 +12,7 @@ export function TypeOptions({
   onTypeChange: CalculateFromBarcodeType;
 }) {
   let options: ReactElement[] = [];
-  Object.keys(BarcodeType).map((k) => {
+  Object.keys(BarcodeType).forEach((k) => {
     options.push(
       <TypeOption
         type={BarcodeType[k as keyof typeof BarcodeType]}
