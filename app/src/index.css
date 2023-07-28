@@ -1,13 +1,14 @@
 :root {
   --color-dark: #191a19;
+  --color-dark-semi-transparent: #191a19c3;
   --color-disabled: #3e3f3e;
   --color-medium: #565756;
   --color-light: #f2f2f2;
   --color-white: #fff;
   --color-active: #8dbb8d;
+  --color-transparent: #00000000;
+  --label-button-padding: 0.5rem;
   --border-radius: 0.25rem;
-  --row-gap: 1.5rem;
-  --inner-column-gap: 1.5rem;
   --font-family: BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
@@ -19,6 +20,10 @@
 :focus-visible {
   outline-color: var(--color-active);
   outline-style: solid;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -36,6 +41,9 @@ code {
 }
 
 input {
+  display: flex;
+  margin: 0.25rem;
+  padding: 0.5rem;
   border-color: var(--color-medium);
   border-style: solid;
   vertical-align: middle;
@@ -50,117 +58,57 @@ input:disabled {
   color: var(--color-light);
 }
 input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"] + label {
+  display: block;
   cursor: pointer;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: var(--border-radius);
+  background-color: var(--color-disabled);
+  color: var(--color-light);
+  padding: var(--label-button-padding);
 }
-input[type="checkbox"]:checked {
-  accent-color: var(--color-active);
+input[type="checkbox"] + label:hover {
+  background: var(--color-medium);
 }
-
-select {
-  border-radius: var(--border-radius);
-}
-
-option:hover {
-  color: var(--color-active);
+input[type="checkbox"]:checked + label {
+  background-color: var(--color-active);
+  color: var(--color-dark);
 }
 
 .page-content {
+  padding: 0 1rem 1rem 1rem;
   display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  flex-direction: column;
-  justify-content: center;
-}
-
-.barcode-calculator-grid-container {
-  max-width: fit-content;
-  display: grid;
-  margin: 2rem;
-  column-gap: 2rem;
-  row-gap: var(--row-gap);
-}
-.barcode-calculator-grid-container-left {
-  grid-column: 1;
-  display: grid;
-  column-gap: var(--inner-column-gap);
-  row-gap: var(--row-gap);
-}
-.barcode-calculator-grid-type-label {
-  grid-column: 1;
-  grid-row: 1;
-}
-.barcode-calculator-grid-type-input {
-  grid-column: 2;
-  grid-row: 1;
-}
-.barcode-calculator-grid-input-label {
-  grid-column: 1;
-  grid-row: 2;
-}
-.barcode-calculator-grid-input-input {
-  grid-column: 2;
-  grid-row: 2;
-}
-.barcode-calculator-grid-output-label {
-  grid-column: 1;
-  grid-row: 3;
-}
-.barcode-calculator-grid-output-input {
-  grid-column: 2;
-  grid-row: 3;
-}
-
-.barcode-calculator-grid-container-right {
-  grid-column: 2;
-  display: grid;
-  column-gap: var(--inner-column-gap);
-  row-gap: var(--row-gap);
+  margin: auto;
   align-items: center;
+  justify-items: space-between;
 }
-@media (max-width: 600px) {
-  .barcode-calculator-grid-container-right {
-    grid-column: 1;
-    display: grid;
-    column-gap: var(--inner-column-gap);
-    row-gap: var(--row-gap);
+
+@media (min-width: 600px) {
+  .fields-container {
+    width: 60%;
+    max-width: fit-content;
+    margin: auto;
   }
-}
-.barcode-calculator-grid-luhn {
-  grid-column: 1;
-  grid-row: 1;
-}
-.barcode-calculator-grid-upca {
-  grid-column: 1;
-  grid-row: 2;
-}
-.barcode-calculator-grid-length {
-  grid-column: 1;
-  grid-row: 3;
+  .page-content {
+    padding: 0 1rem 1rem 1rem;
+  }
 }
 
 .barcode-canvas {
   padding: 1rem;
-  width: 100%;
-  height: 100%;
-  max-width: fit-content;
+  width: fit-content;
   position: relative;
   margin: auto;
   box-shadow: 0 0 0.25rem 0.25rem var(--color-white);
   background-color: var(--color-white);
 }
 .barcode-canvas-invisible {
-  opacity: 0;
+  display: none;
 }
 .hidden-buttons {
   display: flex;
   position: absolute;
   justify-content: center;
-  right: 0;
   bottom: 0;
 }
 .hidden-button {
@@ -211,22 +159,9 @@ option:hover {
   color: var(--color-active);
 }
 
-.label-input-parent {
-  display: flex;
-  column-gap: var(--inner-column-gap);
-  align-items: center;
-}
-
-.checkbox-right {
-  margin-left: auto;
-  margin-right: 0;
-}
-
 .length-input {
   min-width: 1rem;
   text-align: center;
-  margin-left: auto;
-  margin-right: 0;
 }
 
 .info-message {
@@ -247,7 +182,7 @@ option:hover {
   background-color: var(--color-active);
 }
 .header-name {
-  color: #191a19c3;
+  color: var(--color-dark-semi-transparent);
   text-shadow: 0.05rem 0.1rem 0.15rem var(--color-active), 0 0 0 #000,
     0.05rem 0.1rem 0.15rem var(--color-active);
   font-size: 1.8rem;
@@ -257,4 +192,50 @@ option:hover {
   color: var(--color-dark);
   margin-left: auto;
   margin-right: 1.5rem;
+}
+
+.type-options-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  position: relative;
+  margin: auto;
+  justify-content: center;
+}
+
+.type-options {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0 0 0 0;
+}
+
+.type-options li {
+  text-align: center;
+  display: inline;
+  position: relative;
+}
+
+.type-options input[type="radio"] {
+  opacity: 0;
+  display: none;
+}
+
+.type-options input[type="radio"]:checked + label {
+  background: var(--color-active);
+  color: var(--color-dark);
+  cursor: default;
+  pointer-events: none;
+}
+
+.type-options label {
+  padding: var(--label-button-padding);
+  cursor: pointer;
+  background: var(--color-disabled);
+}
+
+.type-options label:hover {
+  background: var(--color-medium);
+}
+
+.data-fields {
+  margin: 0 1rem 0 0;
 }

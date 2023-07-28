@@ -15,6 +15,28 @@ export const invalidCharactersMessage: Message = {
   message: "Invalid characters detected",
 };
 
+export const invalidStartStopCharactersMessage = (
+  typeName: string,
+  validCharacters: string
+) => {
+  return {
+    level: MessageLevel.Error,
+    message: `${typeName} first character and last character must be ${charactersMessage(
+      validCharacters
+    )}`,
+  };
+};
+
+export const invalidDataCharactersMessage = (
+  typeName: string,
+  validCharacters: string
+) => {
+  return {
+    level: MessageLevel.Error,
+    message: `${typeName} data must be ${charactersMessage(validCharacters)}`,
+  };
+};
+
 export const numericOnlyMessage = (typeName: string) => {
   return {
     level: MessageLevel.Error,
@@ -47,3 +69,20 @@ export const truncatedDataMessage = (typeName: string, length: number) => {
     message: `Input truncated, ${typeName} barcodes have max input length ${length}`,
   };
 };
+
+export const dataTooShortMessage = (typeName: string, length: number) => {
+  return {
+    level: MessageLevel.Error,
+    message: `${typeName} barcodes have min input length ${length}`,
+  };
+};
+
+function charactersMessage(characters: string) {
+  let message = characters
+    .substring(0, characters.length - 1)
+    .split("")
+    .join(" ");
+  message += ` or ${characters.charAt(characters.length - 1)}`;
+
+  return message;
+}

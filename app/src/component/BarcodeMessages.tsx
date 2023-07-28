@@ -1,7 +1,13 @@
 import { ReactElement } from "react";
 import { Message, MessageLevel } from "../interface/Message";
 
-export function BarcodeMessages({ messages }: { messages: Message[] }) {
+export function BarcodeMessages({
+  messages,
+  className,
+}: {
+  messages: Message[];
+  className: string;
+}) {
   let displayMessages: ReactElement[] = [];
 
   messages.forEach((m) => {
@@ -40,6 +46,6 @@ export function BarcodeMessages({ messages }: { messages: Message[] }) {
     }
   });
 
-  return <div>{displayMessages}</div>;
+  return <div className={className}>{displayMessages}</div>;
 }
 export { MessageLevel as messageLevel };

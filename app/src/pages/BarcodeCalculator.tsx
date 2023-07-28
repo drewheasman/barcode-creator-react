@@ -52,56 +52,45 @@ export function BarcodeCalculator() {
   );
 
   return (
-    <div className="page-content">
-      <div className="barcode-calculator-grid-container">
-        <div className="barcode-calculator-grid-container-left">
-          <label className="barcode-calculator-grid-type-label">Type</label>
-          <TypeOptions
-            className="barcode-calculator-grid-type-input"
-            type={barcodeType}
-            onTypeChange={onBarcodeTypeChange}
-          />
-          <label
-            className={"barcode-calculator-grid-input-label"}
-            htmlFor="data-input"
-          >
-            Input
-          </label>
+    <>
+      <div className="fields-container">
+        <div className="page-content">
+          <div className="type-options-container">
+            <TypeOptions
+              className="type-options"
+              type={barcodeType}
+              onTypeChange={onBarcodeTypeChange}
+            />
+          </div>
+        </div>
+        <div className="page-content">
           <DataTextInput
             id="data-input"
-            className="barcode-calculator-grid-input-input"
+            className="data-fields"
             inputText={inputString}
             onInputTextChange={onInputTextChange}
           />
-          <label
-            className="barcode-calculator-grid-output-label"
-            htmlFor="data-output"
-          >
-            Output
-          </label>
-          <DataTextOutput
-            id="data-output"
-            className="barcode-calculator-grid-output-input"
-            outputText={barcodeData.outputString}
-          />
-        </div>
-        <div className="barcode-calculator-grid-container-right">
           <CheckDigitCheckbox
             label="Luhn"
-            className="barcode-calculator-grid-luhn-checkbox"
+            className=""
             checked={luhnBoolean}
             onCheckDigitChange={onLuhnChange}
           />
           <CheckDigitCheckbox
             label="UPC-A"
-            className="barcode-calculator-grid-upca"
+            className=""
             checked={upcaBoolean}
             onCheckDigitChange={onUpcaChange}
           />
-          <OutputLengthField
-            className="barcode-calculator-grid-length"
-            length={barcodeData.outputLength}
+        </div>
+
+        <div className="page-content barcode-calculator-div">
+          <DataTextOutput
+            id="data-output"
+            className="data-fields"
+            outputText={barcodeData.outputString}
           />
+          <OutputLengthField length={barcodeData.outputLength} />
         </div>
       </div>
 
@@ -110,7 +99,12 @@ export function BarcodeCalculator() {
         barcodeText={barcodeData.barcodeText}
       />
 
-      <BarcodeMessages messages={barcodeData.messages}></BarcodeMessages>
-    </div>
+      <div className="fields-container">
+        <BarcodeMessages
+          className="page-content"
+          messages={barcodeData.messages}
+        ></BarcodeMessages>
+      </div>
+    </>
   );
 }

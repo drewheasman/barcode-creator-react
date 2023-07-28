@@ -1,7 +1,9 @@
 export function nw7Lines(data: string) {
   let lines = "";
 
-  // TODO: return the lines
+  for (let i = 0; i < data.length; i++) {
+    lines += linesMap[data.charAt(i)];
+  }
 
   return lines;
 }

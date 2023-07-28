@@ -7,5 +7,13 @@ export function DataTextOutput({
   className: string;
   outputText: string;
 }) {
-  return <input id={id} className={className} value={outputText} disabled />;
+  return (
+    <input
+      id={id}
+      className={className}
+      value={outputText}
+      placeholder="Output barcode data"
+      disabled
+    />
+  );
 }

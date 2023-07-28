@@ -14,17 +14,19 @@ export function CheckDigitCheckbox({
   const divClass = `${className} label-input-parent`;
 
   return (
-    <label htmlFor={label} className={divClass}>
-      {label}
+    <div>
       <input
         id={label}
-        className="checkbox-right"
+        className=""
         type="checkbox"
         checked={checked}
         onChange={(e) => {
           onCheckDigitChange(e.target.checked);
         }}
       />
-    </label>
+      <label htmlFor={label} className={divClass}>
+        {label}
+      </label>
+    </div>
   );
 }
