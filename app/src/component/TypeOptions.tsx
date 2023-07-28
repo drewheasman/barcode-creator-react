@@ -11,24 +11,39 @@ export function TypeOptions({
   type: BarcodeType;
   onTypeChange: CalculateFromBarcodeType;
 }) {
-  const typeOptions = Object.keys(BarcodeType).map((key) => {
-    let options: ReactElement[] = [];
+  let options: ReactElement[] = [];
+  Object.keys(BarcodeType).map((k) => {
     options.push(
-      <option key={key}>{BarcodeType[key as keyof typeof BarcodeType]}</option>
+      <TypeOption
+        type={BarcodeType[k as keyof typeof BarcodeType]}
+        selectedType={type}
+        onTypeChange={onTypeChange}
+      />
     );
-    return options;
   });
 
+  return <ul className={className}>{options}</ul>;
+}
+
+function TypeOption({
+  type,
+  selectedType,
+  onTypeChange,
+}: {
+  type: BarcodeType;
+  selectedType: BarcodeType;
+  onTypeChange: CalculateFromBarcodeType;
+}) {
   return (
-    <select
-      id="barcodeTypes"
-      className={className}
-      value={type}
-      onChange={(e) => {
-        onTypeChange(e.target.value as BarcodeType);
-      }}
-    >
-      {typeOptions}
-    </select>
+    <li>
+      <input
+        id={type}
+        name={type}
+        type="radio"
+        checked={type === selectedType}
+        onChange={() => onTypeChange(type)}
+      />
+      <label htmlFor={type}>{type}</label>
+    </li>
   );
 }

@@ -14,7 +14,7 @@ export function DataTextInput({
       id={id}
       className={className}
       type="text"
-      placeholder="Type barcode data"
+      placeholder="Input barcode data"
       value={inputText}
       onChange={(e) => {
         onInputTextChange(e.target.value);
