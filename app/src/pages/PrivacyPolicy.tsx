@@ -52,6 +52,12 @@ export function PrivacyPolicy() {
         We retain the right to modify or update this Privacy Policy as needed.
         Any revisions will be posted on this page with a revised effective date.
       </p>
+      <h3>7. Contact Us</h3>
+      <p>
+        For inquiries about this Privacy Policy or your privacy while using our
+        website, please reach out to us at{" "}
+        <a href="mailto:createbarcodes@gmail.com">createbarcodes@gmail.com</a>
+      </p>
     </div>
   );
 }
