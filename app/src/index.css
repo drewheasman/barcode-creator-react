@@ -188,6 +188,10 @@ input[type="checkbox"]:checked + label {
     0.05rem 0.1rem 0.15rem var(--color-active);
   font-size: 1.8rem;
   margin-left: 1.5rem;
+  > a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 .header-logo {
   color: var(--color-dark);

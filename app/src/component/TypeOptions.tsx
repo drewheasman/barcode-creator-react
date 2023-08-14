@@ -16,6 +16,7 @@ export function TypeOptions({
     options.push(
       <TypeOption
         type={BarcodeType[k as keyof typeof BarcodeType]}
+        key={BarcodeType[k as keyof typeof BarcodeType]}
         selectedType={type}
         onTypeChange={onTypeChange}
       />
