@@ -1,7 +1,9 @@
 export function Header() {
   return (
     <header className="header">
-      <h1 className="header-name">Create Barcodes</h1>
+      <h1 className="header-name">
+        <a href="/">Create Barcodes</a>
+      </h1>
       <a
         className="header-logo"
         href="https://github.com/drewheasman/barcode-creator-react"
@@ -16,7 +18,7 @@ export function Header() {
               in2="offset-blur"
               result="inverse"
             />
-            <feFlood flood-color="black" flood-opacity="1" result="color" />
+            <feFlood floodColor="black" floodOpacity="1" result="color" />
             <feComposite
               operator="in"
               in="color"

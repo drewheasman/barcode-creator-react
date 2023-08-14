@@ -10,6 +10,7 @@ module.exports = {
   output: {
     path: __dirname + "/dist/",
     filename: "[name].[contenthash].js",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -28,6 +29,9 @@ module.exports = {
     ],
   },
   devtool: prod ? undefined : "source-map",
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       favicon: "./public/favicon.ico",
