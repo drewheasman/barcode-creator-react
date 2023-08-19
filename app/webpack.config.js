@@ -42,6 +42,7 @@ module.exports = {
         { from: "./public/manifest.json" },
         { from: "./public/logo192.png" },
         { from: "./public/logo512.png" },
+        { from: "./public/ads.txt" },
       ],
     }),
     new MiniCssExtractPlugin({
