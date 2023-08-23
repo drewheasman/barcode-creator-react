@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import { CalculateFromCheckDigit } from "../interface/Calculate";
 
 export function CheckDigitCheckbox({

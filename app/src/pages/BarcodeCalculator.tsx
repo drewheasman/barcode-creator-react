@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react";
-import { BarcodeImage } from "../component/Barcode/BarcodeImage";
 import { CheckDigitCheckbox } from "../component/CheckDigitCheckbox";
 import { DataTextInput } from "../component/DataTextInput";
 import { DataTextOutput } from "../component/DataTextOutput";

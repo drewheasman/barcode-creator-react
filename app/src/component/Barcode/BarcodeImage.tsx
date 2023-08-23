@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useEffect } from "react";
 
 const barcodeWidth = 2;
 const barcodeHeight = 100;
