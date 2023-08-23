@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { BarcodeImage } from "../component/BarcodeImage";
+import { BarcodeImage } from "../component/Barcode/BarcodeImage";
 import { CheckDigitCheckbox } from "../component/CheckDigitCheckbox";
 import { DataTextInput } from "../component/DataTextInput";
 import { DataTextOutput } from "../component/DataTextOutput";
@@ -12,8 +12,9 @@ import {
 import { CalculatedBarcodeData } from "../interface/CalculatedBarcodeData";
 import { calculateBarcodeData } from "../util/Calculate";
 import { OutputLengthField } from "../component/DataTextLength";
-import { BarcodeMessages } from "../component/BarcodeMessages";
+import { CalculateMessages } from "../component/CalculateMessages";
 import { BarcodeType } from "../enum/BarcodeType";
+import { BarcodeCard } from "../component/Barcode/BarcodeCard";
 
 export function BarcodeCalculator() {
   const [barcodeType, setBarcodeType] = useState(BarcodeType.Code128);
@@ -53,57 +54,50 @@ export function BarcodeCalculator() {
 
   return (
     <>
-      <div className="fields-container">
-        <div className="page-content">
-          <div className="type-options-container">
-            <TypeOptions
-              className="type-options"
-              type={barcodeType}
-              onTypeChange={onBarcodeTypeChange}
+      <div className="container py-3">
+        <div className="row overflow-auto py-1">
+          <TypeOptions type={barcodeType} onTypeChange={onBarcodeTypeChange} />
+        </div>
+        <div className="row py-1">
+          <div className="col col-md input-group">
+            <DataTextInput
+              id="data-input"
+              inputText={inputString}
+              onInputTextChange={onInputTextChange}
+            />
+            <CheckDigitCheckbox
+              label="Luhn"
+              checked={luhnBoolean}
+              onCheckDigitChange={onLuhnChange}
+            />
+            <CheckDigitCheckbox
+              label="UPC-A"
+              checked={upcaBoolean}
+              onCheckDigitChange={onUpcaChange}
             />
           </div>
         </div>
-        <div className="page-content">
-          <DataTextInput
-            id="data-input"
-            className="data-fields"
-            inputText={inputString}
-            onInputTextChange={onInputTextChange}
-          />
-          <CheckDigitCheckbox
-            label="Luhn"
-            className=""
-            checked={luhnBoolean}
-            onCheckDigitChange={onLuhnChange}
-          />
-          <CheckDigitCheckbox
-            label="UPC-A"
-            className=""
-            checked={upcaBoolean}
-            onCheckDigitChange={onUpcaChange}
-          />
-        </div>
 
-        <div className="page-content barcode-calculator-div">
+        <div className="input-group py-1">
           <DataTextOutput
             id="data-output"
-            className="data-fields"
             outputText={barcodeData.outputString}
           />
           <OutputLengthField length={barcodeData.outputLength} />
         </div>
-      </div>
 
-      <BarcodeImage
-        barcodeLinesBits={barcodeData.barcodeLinesBits}
-        barcodeText={barcodeData.barcodeText}
-      />
+        <div className="py-1">
+          <BarcodeCard
+            barcodeLinesBits={barcodeData.barcodeLinesBits}
+            barcodeText={barcodeData.barcodeText}
+          />
+        </div>
 
-      <div className="fields-container">
-        <BarcodeMessages
-          className="page-content"
-          messages={barcodeData.messages}
-        ></BarcodeMessages>
+        <div className="py-1">
+          <CalculateMessages
+            messages={barcodeData.messages}
+          ></CalculateMessages>
+        </div>
       </div>
     </>
   );

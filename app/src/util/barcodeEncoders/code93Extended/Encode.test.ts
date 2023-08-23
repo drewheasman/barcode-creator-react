@@ -22,8 +22,8 @@ test("Code 93 extended encode success", () => {
 
 test("Code 93 extended encode invalid characters", () => {
   expect(encodeCode93Extended("Code 93 Extended¬")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [

@@ -14,8 +14,8 @@ test("Encode EAN8 success", () => {
 
 test("Encode EAN8 invalid characters", () => {
   expect(encodeEan8("401234512abc")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [

@@ -8,13 +8,15 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Routes>
-        <Route path="/">
-          <Route index element={<BarcodeCalculator />} />
-          <Route path="privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="*" element={<BarcodeCalculator />} />
-        </Route>
-      </Routes>
+      <main style={{ paddingBottom: "7rem" }}>
+        <Routes>
+          <Route path="/">
+            <Route index element={<BarcodeCalculator />} />
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="*" element={<BarcodeCalculator />} />
+          </Route>
+        </Routes>
+      </main>
       <Footer />
     </BrowserRouter>
   );

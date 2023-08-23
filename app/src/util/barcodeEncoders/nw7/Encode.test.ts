@@ -14,8 +14,8 @@ test("Encode NW7 success", () => {
 
 test("Encode NW7 invalid start", () => {
   expect(encodeNW7("123+-/:$.*")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [
@@ -30,8 +30,8 @@ test("Encode NW7 invalid start", () => {
 
 test("Encode NW7 invalid stop", () => {
   expect(encodeNW7("*123+-/:$.")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [
@@ -46,8 +46,8 @@ test("Encode NW7 invalid stop", () => {
 
 test("Encode NW7 invalid data", () => {
   expect(encodeNW7("*123+-/:$.¬*")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [
@@ -61,8 +61,8 @@ test("Encode NW7 invalid data", () => {
 
 test("Encode NW7 data too short", () => {
   expect(encodeNW7("**")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [

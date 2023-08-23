@@ -1,50 +1,40 @@
 import { ReactElement } from "react";
 import { CalculateFromBarcodeType } from "../interface/Calculate";
 import { BarcodeType } from "../enum/BarcodeType";
+import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 
 export function TypeOptions({
-  className,
   type,
   onTypeChange,
 }: {
-  className: string;
   type: BarcodeType;
   onTypeChange: CalculateFromBarcodeType;
 }) {
   let options: ReactElement[] = [];
   Object.keys(BarcodeType).forEach((k) => {
+    const barcodeType: string = BarcodeType[k as keyof typeof BarcodeType];
     options.push(
-      <TypeOption
-        type={BarcodeType[k as keyof typeof BarcodeType]}
-        key={BarcodeType[k as keyof typeof BarcodeType]}
-        selectedType={type}
-        onTypeChange={onTypeChange}
-      />
+      <ToggleButton
+        value={barcodeType}
+        id={barcodeType}
+        key={barcodeType}
+        variant="outline-success"
+      >
+        {barcodeType}
+      </ToggleButton>
     );
   });
 
-  return <ul className={className}>{options}</ul>;
-}
-
-function TypeOption({
-  type,
-  selectedType,
-  onTypeChange,
-}: {
-  type: BarcodeType;
-  selectedType: BarcodeType;
-  onTypeChange: CalculateFromBarcodeType;
-}) {
   return (
-    <li>
-      <input
-        id={type}
-        name={type}
-        type="radio"
-        checked={type === selectedType}
-        onChange={() => onTypeChange(type)}
-      />
-      <label htmlFor={type}>{type}</label>
-    </li>
+    <ToggleButtonGroup
+      type="radio"
+      name="Barcode type options"
+      value={type}
+      onChange={onTypeChange}
+      role="group"
+      className="text-nowrap"
+    >
+      {options}
+    </ToggleButtonGroup>
   );
 }
