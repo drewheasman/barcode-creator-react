@@ -57,6 +57,7 @@ export function BarcodeImage({
 
   return (
     <canvas
+      data-testid="barcode-canvas"
       ref={canvasRef}
       style={{ maxWidth: "100%", height: barcodeCanvasHeight }}
     />
