@@ -1,14 +1,12 @@
-export function OutputLengthField({ length }: { length: string }) {
-  const inputStyle = { width: `${length.length * 0.5}rem` };
+import { InputGroup } from "react-bootstrap";
 
+export function OutputLengthField({ length }: { length: string }) {
   return (
-    <input
+    <InputGroup.Text
       id="data-output-length"
-      className="length-input"
-      placeholder="0"
-      style={inputStyle}
-      disabled
-      value={length}
-    />
+      className="input-group-text text-white-50 disabled"
+    >
+      {length}
+    </InputGroup.Text>
   );
 }

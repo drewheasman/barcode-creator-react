@@ -14,8 +14,8 @@ test("Encode ITF success", () => {
 
 test("Encode ITF invalid characters", () => {
   expect(encodeITF("401234512abc")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [
@@ -36,7 +36,7 @@ test("Encode ITF odd length input", () => {
     barcodeText: "06020034",
     messages: [
       {
-        level: MessageLevel.Warn,
+        level: MessageLevel.Info,
         message: "Input padded, ITF barcodes have input length that is even",
       },
     ],

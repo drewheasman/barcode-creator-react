@@ -14,8 +14,8 @@ test("Encode Code128 success", () => {
 
 test("Encode Code128 invalid characters", () => {
   expect(encodeCode128("401234512abc¬")).toStrictEqual({
-    outputString: "",
-    outputLength: "",
+    outputString: "Barcode output data",
+    outputLength: "0",
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [

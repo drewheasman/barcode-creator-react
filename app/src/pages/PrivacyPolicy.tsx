@@ -1,6 +1,8 @@
+import { Container } from "react-bootstrap";
+
 export function PrivacyPolicy() {
   return (
-    <div className="privacy-policy">
+    <Container className="privacy-policy my-3">
       <h2>Privacy Policy</h2>
       <p>Effective Date: 13th August 2023</p>
       <p>
@@ -58,6 +60,6 @@ export function PrivacyPolicy() {
         website, please reach out to us at{" "}
         <a href="mailto:createbarcodes@gmail.com">createbarcodes@gmail.com</a>
       </p>
-    </div>
+    </Container>
   );
 }
