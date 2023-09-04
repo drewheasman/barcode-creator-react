@@ -25,7 +25,7 @@ export function CalculateMessages({ messages }: { messages: Message[] }) {
 
 function messageAlert(message: string, alertTypeClass: string) {
   return (
-    <div className={`alert ${alertTypeClass}`} role="alert">
+    <div className={`alert ${alertTypeClass}`} role="alert" key={message}>
       {message}
     </div>
   );
