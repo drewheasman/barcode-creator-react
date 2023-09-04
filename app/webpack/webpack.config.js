@@ -3,12 +3,13 @@ const prod = process.env.NODE_ENV === "production";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const SitemapPlugin = require("./sitemapPlugin");
 
 module.exports = {
   mode: prod ? "production" : "development",
   entry: "./src/index.tsx",
   output: {
-    path: __dirname + "/dist/",
+    path: __dirname + "/../dist/",
     filename: "[name].[contenthash].js",
     publicPath: "/",
   },
@@ -34,9 +35,12 @@ module.exports = {
   },
   devtool: prod ? undefined : "source-map",
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
   plugins: [
+    new SitemapPlugin(),
     new HtmlWebpackPlugin({
       favicon: "./public/favicon.ico",
       template: "./public/index.html",
@@ -46,6 +50,8 @@ module.exports = {
         { from: "./public/manifest.json" },
         { from: "./public/logo192.png" },
         { from: "./public/logo512.png" },
+        { from: "./public/sitemap.xml" },
+        { from: "./public/robots.txt" },
         { from: "./public/ads.txt" },
       ],
     }),

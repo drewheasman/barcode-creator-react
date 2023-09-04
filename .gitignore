@@ -1,4 +1,6 @@
+.terraform/
+
 node_modules/
 coverage/
+sitemap.xml
 dist/
-.terraform/
