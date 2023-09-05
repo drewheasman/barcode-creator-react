@@ -9,6 +9,9 @@ test("Encode ITF success", () => {
       "101010111011100001000010101110100001000011101000010000111011101011101",
     barcodeText: "602003",
     messages: [],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -24,6 +27,9 @@ test("Encode ITF invalid characters", () => {
         message: "ITF barcodes are numeric only",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -40,5 +46,8 @@ test("Encode ITF odd length input", () => {
         message: "Input padded, ITF barcodes have input length that is even",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
