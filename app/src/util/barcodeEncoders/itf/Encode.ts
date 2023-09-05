@@ -1,5 +1,8 @@
 import { CalculatedBarcodeData } from "../../../interface/CalculatedBarcodeData";
-import { numericOnlyMessage, paddedEvenDataMessage } from "../../Messages";
+import {
+  numericOnlyMessage,
+  paddedEvenDataMessage,
+} from "../../Messages/Messages";
 import { invalidNumericInput } from "../InvalidInput";
 import { itfLines } from "./Lines";
 import { BarcodeType } from "../../../enum/BarcodeType";

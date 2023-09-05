@@ -1,14 +1,20 @@
 import { Form } from "react-bootstrap";
+import { MessageLevel } from "../enum/MessageLevel";
+import { levelColor } from "../util/Messages/LevelColor";
 
 export function DataTextInput({
   id,
   inputText,
+  level,
   onInputTextChange,
 }: {
   id: string;
   inputText: string;
+  level: MessageLevel;
   onInputTextChange: (inputText: string) => void;
 }) {
+  let classColor = levelColor(level);
+
   return (
     <Form.Control
       autoFocus
@@ -19,7 +25,7 @@ export function DataTextInput({
       onChange={(e) => {
         onInputTextChange(e.target.value);
       }}
-      className="border-success"
+      className={`border-${classColor} focus-${classColor}`}
     />
   );
 }

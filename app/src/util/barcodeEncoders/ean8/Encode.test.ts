@@ -9,6 +9,9 @@ test("Encode EAN8 success", () => {
       "000101001000110001101001100100100110101010000101011100100111010011101010000",
     barcodeText: "40123455",
     messages: [],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -24,6 +27,9 @@ test("Encode EAN8 invalid characters", () => {
         message: "EAN-8 barcodes are numeric only",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -40,6 +46,9 @@ test("Encode EAN8 short input", () => {
         message: "Input padded, EAN-8 barcodes have input length 7",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -56,5 +65,8 @@ test("Encode EAN8 long input", () => {
         message: "Input truncated, EAN-8 barcodes have max input length 7",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });

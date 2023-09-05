@@ -1,6 +1,6 @@
 import { CalculatedBarcodeData } from "../../../interface/CalculatedBarcodeData";
 import { getInitialData } from "../../Constants";
-import { invalidCharactersMessage } from "../../Messages";
+import { invalidCharactersMessage } from "../../Messages/Messages";
 import { invalidInput } from "../InvalidInput";
 import { code93ExtendedCharacters } from "./Characters";
 import { code93ExtendedLines } from "./Lines";

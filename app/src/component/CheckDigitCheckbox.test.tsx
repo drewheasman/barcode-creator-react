@@ -1,5 +1,6 @@
 import { render, fireEvent } from "@testing-library/react";
 import { CheckDigitCheckbox } from "./CheckDigitCheckbox";
+import { MessageLevel } from "../enum/MessageLevel";
 
 describe("CheckDigitCheckbox", () => {
   const mockOnCheckDigitChange = jest.fn();
@@ -13,6 +14,7 @@ describe("CheckDigitCheckbox", () => {
       <CheckDigitCheckbox
         label="Test Checkbox"
         checked={false}
+        level={MessageLevel.Error}
         onCheckDigitChange={mockOnCheckDigitChange}
       />
     );
@@ -26,6 +28,7 @@ describe("CheckDigitCheckbox", () => {
       <CheckDigitCheckbox
         label="Test Checkbox"
         checked={true}
+        level={MessageLevel.Info}
         onCheckDigitChange={mockOnCheckDigitChange}
       />
     );
@@ -39,6 +42,7 @@ describe("CheckDigitCheckbox", () => {
       <CheckDigitCheckbox
         label="Test Checkbox"
         checked={false}
+        level={MessageLevel.Warn}
         onCheckDigitChange={mockOnCheckDigitChange}
       />
     );
@@ -54,6 +58,7 @@ describe("CheckDigitCheckbox", () => {
       <CheckDigitCheckbox
         label="Test Checkbox"
         checked={true}
+        level={MessageLevel.Error}
         onCheckDigitChange={mockOnCheckDigitChange}
       />
     );

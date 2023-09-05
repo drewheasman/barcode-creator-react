@@ -9,6 +9,9 @@ test("Encode EAN13 success", () => {
       "0001010000110101100110010011011110100111010111001010101100110110110010000101011100100111010100001010000",
     barcodeText: "4012345123456",
     messages: [],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -24,6 +27,9 @@ test("Encode EAN13 invalid characters", () => {
         message: "EAN-13 barcodes are numeric only",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -40,6 +46,9 @@ test("Encode EAN13 short input", () => {
         message: "Input padded, EAN-13 barcodes have input length 12",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });
 
@@ -56,5 +65,8 @@ test("Encode EAN13 long input", () => {
         message: "Input truncated, EAN-13 barcodes have max input length 12",
       },
     ],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   });
 });

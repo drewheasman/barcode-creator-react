@@ -1,4 +1,4 @@
-import { Message, MessageLevel } from "../interface/Message";
+import { Message, MessageLevel } from "../../interface/Message";
 
 export const cannotProcessTypeMessage: Message = {
   level: MessageLevel.Error,

@@ -3,7 +3,7 @@ import {
   numericOnlyMessage,
   paddedDataMessage,
   truncatedDataMessage,
-} from "../../Messages";
+} from "../../Messages/Messages";
 import { invalidNumericInput } from "../InvalidInput";
 import { ean13Lines } from "./Lines";
 import { BarcodeType } from "../../../enum/BarcodeType";
