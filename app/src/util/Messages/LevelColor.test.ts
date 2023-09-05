@@ -13,4 +13,8 @@ describe("levelColor function", () => {
   it("should return 'warning' for MessageLevel.Warn", () => {
     expect(levelColor(MessageLevel.Warn)).toBe("warning");
   });
+
+  it("should return 'success' for unknown MessageLevel", () => {
+    expect(levelColor(999 as MessageLevel)).toBe("success");
+  });
 });

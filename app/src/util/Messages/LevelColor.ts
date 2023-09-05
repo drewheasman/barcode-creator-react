@@ -14,7 +14,7 @@ export function levelColor(level: MessageLevel) {
       classColor = "warning";
       break;
     default:
-      classColor = "$success";
+      classColor = "success";
       break;
   }
   return classColor;
