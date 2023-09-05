@@ -1,3 +1,4 @@
+import { MessageLevel } from "../enum/MessageLevel";
 import { CalculatedBarcodeData } from "../interface/CalculatedBarcodeData";
 
 export function getInitialData(): CalculatedBarcodeData {
@@ -7,5 +8,8 @@ export function getInitialData(): CalculatedBarcodeData {
     barcodeLinesBits: "",
     barcodeText: "",
     messages: [],
+    inputLevel: MessageLevel.Info,
+    luhnLevel: MessageLevel.Info,
+    upcaLevel: MessageLevel.Info,
   };
 }

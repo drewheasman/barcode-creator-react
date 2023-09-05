@@ -1,6 +1,9 @@
 import { CalculatedBarcodeData } from "../interface/CalculatedBarcodeData";
-import { Message } from "../interface/Message";
-import { calculateFailMessage, cannotProcessTypeMessage } from "./Messages";
+import { Message, MessageLevel } from "../interface/Message";
+import {
+  calculateFailMessage,
+  cannotProcessTypeMessage,
+} from "./Messages/Messages";
 import { encodeCode128 } from "./barcodeEncoders/code128/Encode";
 import { encodeCode39 } from "./barcodeEncoders/code39/Encode";
 import { encodeCode93Extended } from "./barcodeEncoders/code93Extended/Encode";
@@ -26,18 +29,26 @@ export function calculateBarcodeData(
   }
 
   let checkDigitMessages: Message[] = [];
+  let luhnLevel = MessageLevel.Info;
   if (luhn) {
     const luhnCheck = calculateLuhn(data);
     data += luhnCheck.checkDigit;
     if (luhnCheck.message) {
       checkDigitMessages.push(luhnCheck.message);
+      if (luhnCheck.message.level > returnData.luhnLevel) {
+        luhnLevel = luhnCheck.message.level;
+      }
     }
   }
+  let upcaLevel = MessageLevel.Info;
   if (ucpa) {
     const upcaCheck = calculateEanCheckDigit(data);
     data += upcaCheck.checkDigit;
     if (upcaCheck.message) {
       checkDigitMessages.push(upcaCheck.message);
+      if (upcaCheck.message.level > returnData.upcaLevel) {
+        upcaLevel = upcaCheck.message.level;
+      }
     }
   }
 
@@ -72,6 +83,16 @@ export function calculateBarcodeData(
   }
 
   returnData.messages.push(...checkDigitMessages);
+
+  // Set levels for display
+  returnData.luhnLevel = luhnLevel;
+  returnData.upcaLevel = upcaLevel;
+
+  for (const m of returnData.messages) {
+    if (m.level > returnData.inputLevel) {
+      returnData.inputLevel = m.level;
+    }
+  }
 
   return returnData;
 }

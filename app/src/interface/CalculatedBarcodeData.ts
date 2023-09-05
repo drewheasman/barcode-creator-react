@@ -1,4 +1,4 @@
-import { Message } from "./Message";
+import { Message, MessageLevel } from "./Message";
 
 export interface CalculatedBarcodeData {
   outputString: string;
@@ -6,4 +6,7 @@ export interface CalculatedBarcodeData {
   barcodeLinesBits: string;
   barcodeText: string;
   messages: Message[];
+  inputLevel: MessageLevel;
+  luhnLevel: MessageLevel;
+  upcaLevel: MessageLevel;
 }

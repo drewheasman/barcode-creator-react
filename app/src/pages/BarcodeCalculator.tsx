@@ -62,16 +62,19 @@ export function BarcodeCalculator() {
             <DataTextInput
               id="data-input"
               inputText={inputString}
+              level={barcodeData.inputLevel}
               onInputTextChange={onInputTextChange}
             />
             <CheckDigitCheckbox
               label="Luhn"
               checked={luhnBoolean}
+              level={barcodeData.luhnLevel}
               onCheckDigitChange={onLuhnChange}
             />
             <CheckDigitCheckbox
               label="UPC-A"
               checked={upcaBoolean}
+              level={barcodeData.upcaLevel}
               onCheckDigitChange={onUpcaChange}
             />
           </div>

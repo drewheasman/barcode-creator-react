@@ -5,7 +5,7 @@ import {
   dataTooShortMessage,
   invalidDataCharactersMessage,
   invalidStartStopCharactersMessage,
-} from "../../Messages";
+} from "../../Messages/Messages";
 import { invalidInput } from "../InvalidInput";
 import { nw7Lines } from "./Lines";
 
