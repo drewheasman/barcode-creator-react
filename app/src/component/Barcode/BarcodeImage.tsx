@@ -3,8 +3,9 @@ import { RefObject, useEffect } from "react";
 const barcodeWidth = 2;
 const barcodeHeight = 100;
 const textHeight = 20;
-const padding = 10;
-export const barcodeCanvasHeight = barcodeHeight + textHeight + padding * 2;
+const xPadding = 20;
+const yPadding = 10;
+export const barcodeCanvasHeight = barcodeHeight + textHeight + yPadding * 2;
 
 export function BarcodeImage({
   barcodeLinesBits,
@@ -15,7 +16,7 @@ export function BarcodeImage({
   barcodeText: string;
   canvasRef: RefObject<HTMLCanvasElement>;
 }) {
-  const canvasWidth = (barcodeLinesBits.length + padding) * barcodeWidth;
+  const canvasWidth = (barcodeLinesBits.length + xPadding) * barcodeWidth;
 
   useEffect(() => {
     const context = canvasRef.current?.getContext("2d");
@@ -36,8 +37,11 @@ export function BarcodeImage({
             context.lineWidth = barcodeWidth;
             context.imageSmoothingEnabled = false;
             context.beginPath();
-            context.moveTo(i * barcodeWidth + padding, padding);
-            context.lineTo(i * barcodeWidth + padding, barcodeHeight + padding);
+            context.moveTo(i * barcodeWidth + xPadding, yPadding);
+            context.lineTo(
+              i * barcodeWidth + xPadding,
+              barcodeHeight + yPadding
+            );
             context.stroke();
           }
         }
@@ -50,7 +54,7 @@ export function BarcodeImage({
       context.fillText(
         barcodeText,
         canvasWidth * 0.5,
-        barcodeHeight + textHeight + padding
+        barcodeHeight + textHeight + yPadding
       );
     }
   });
