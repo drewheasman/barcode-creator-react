@@ -11,7 +11,7 @@ describe("Footer", () => {
     );
 
     expect(
-      getByText("© 2023 Create Barcodes. All rights reserved.")
+      getByText("© 2024 Create Barcodes. All rights reserved.")
     ).toBeTruthy();
     expect(getByText("Privacy Policy")).toBeTruthy();
   });
