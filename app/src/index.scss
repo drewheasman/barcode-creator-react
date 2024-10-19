@@ -72,3 +72,7 @@ $focus-colors: (
     background-color: $color-off-dark;
   }
 }
+
+.tooltip {
+  --bs-tooltip-color: $color-active;
+}

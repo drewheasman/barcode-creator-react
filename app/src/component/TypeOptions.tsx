@@ -14,7 +14,13 @@ export function TypeOptions({
   onTypeChange: CalculateFromBarcodeType;
 }) {
   let options: ReactElement[] = [];
-  options.push(<Label key="type-label" label="Symbology" level={MessageLevel.Info} />);
+  options.push(
+    <Label
+      key="type-label"
+      label="Symbology"
+      level={MessageLevel.Info}
+      tooltip="Encoding symbology for the rendered barcode"
+    />);
   Object.keys(BarcodeType).forEach((k) => {
     const barcodeType: string = BarcodeType[k as keyof typeof BarcodeType];
     options.push(
