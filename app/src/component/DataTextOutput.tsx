@@ -8,7 +8,7 @@ export function DataTextOutput({
   outputText: string;
 }) {
   return (
-    <InputGroup.Text id={id} className="form-control text-white-50">
+    <InputGroup.Text id={id} className="data-text form-control text-white-50">
       {outputText}
     </InputGroup.Text>
   );

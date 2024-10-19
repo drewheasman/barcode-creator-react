@@ -1,8 +1,8 @@
 import { render, fireEvent } from "@testing-library/react";
-import { CheckDigitCheckbox } from "./CheckDigitCheckbox";
+import { Checkbox } from "./Checkbox";
 import { MessageLevel } from "../enum/MessageLevel";
 
-describe("CheckDigitCheckbox", () => {
+describe("Checkbox", () => {
   const mockOnCheckDigitChange = jest.fn();
 
   afterEach(() => {
@@ -11,11 +11,11 @@ describe("CheckDigitCheckbox", () => {
 
   it("renders correctly with label and checked=false", () => {
     const { getByLabelText } = render(
-      <CheckDigitCheckbox
+      <Checkbox
         label="Test Checkbox"
         checked={false}
         level={MessageLevel.Error}
-        onCheckDigitChange={mockOnCheckDigitChange}
+        onCheckboxChange={mockOnCheckDigitChange}
       />
     );
 
@@ -25,11 +25,11 @@ describe("CheckDigitCheckbox", () => {
 
   it("renders correctly with label and checked=true", () => {
     const { getByLabelText } = render(
-      <CheckDigitCheckbox
+      <Checkbox
         label="Test Checkbox"
         checked={true}
         level={MessageLevel.Info}
-        onCheckDigitChange={mockOnCheckDigitChange}
+        onCheckboxChange={mockOnCheckDigitChange}
       />
     );
 
@@ -39,11 +39,11 @@ describe("CheckDigitCheckbox", () => {
 
   it("calls onCheckDigitChange when checkbox is clicked", () => {
     const { getByLabelText } = render(
-      <CheckDigitCheckbox
+      <Checkbox
         label="Test Checkbox"
         checked={false}
         level={MessageLevel.Warn}
-        onCheckDigitChange={mockOnCheckDigitChange}
+        onCheckboxChange={mockOnCheckDigitChange}
       />
     );
 
@@ -55,11 +55,11 @@ describe("CheckDigitCheckbox", () => {
 
   it("calls onCheckDigitChange with false when checkbox is clicked while checked", () => {
     const { getByLabelText } = render(
-      <CheckDigitCheckbox
+      <Checkbox
         label="Test Checkbox"
         checked={true}
         level={MessageLevel.Error}
-        onCheckDigitChange={mockOnCheckDigitChange}
+        onCheckboxChange={mockOnCheckDigitChange}
       />
     );
 

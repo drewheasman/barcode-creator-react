@@ -11,10 +11,12 @@ export function BarcodeImage({
   barcodeLinesBits,
   barcodeText,
   canvasRef,
+  hidden = false,
 }: {
   barcodeLinesBits: string;
   barcodeText: string;
   canvasRef: RefObject<HTMLCanvasElement>;
+  hidden?: boolean;
 }) {
   const canvasWidth = (barcodeLinesBits.length + xPadding) * barcodeWidth;
 
@@ -25,6 +27,7 @@ export function BarcodeImage({
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         return;
       }
+      context.canvas.hidden = hidden;
       context.canvas.width = canvasWidth;
       context.canvas.height = barcodeCanvasHeight;
       context.fillStyle = "#FFF";

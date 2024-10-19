@@ -4,7 +4,7 @@ export function OutputLengthField({ length }: { length: string }) {
   return (
     <InputGroup.Text
       id="data-output-length"
-      className="input-group-text text-white-50 disabled"
+      className="data-text text-white-50 disabled"
     >
       {length}
     </InputGroup.Text>

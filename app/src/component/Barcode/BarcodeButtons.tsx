@@ -24,13 +24,15 @@ export function BarcodeButtons({
         id="copy-barcode"
         aria-label="Copy barcode"
         onClick={() => {
-          copyCanvas(canvasRef);
-          setRecentCopy(true);
-          setCopyEnabled(false);
-          setTimeout(() => {
-            setRecentCopy(false);
-            setCopyEnabled(true);
-          }, 500);
+          if (canvasRef.current) {
+            copyCanvas(canvasRef.current);
+            setRecentCopy(true);
+            setCopyEnabled(false);
+            setTimeout(() => {
+              setRecentCopy(false);
+              setCopyEnabled(true);
+            }, 500);
+          }
         }}
         disabled={!copyEnabled}
         variant="outline-success"
@@ -46,13 +48,15 @@ export function BarcodeButtons({
         id="download-barcode"
         aria-label="Download barcode"
         onClick={() => {
-          downloadCanvas(canvasRef, barcodeText);
-          setRecentDownload(true);
-          setDownloadEnabled(false);
-          setTimeout(() => {
-            setRecentDownload(false);
-            setDownloadEnabled(true);
-          }, 500);
+          if (canvasRef.current) {
+            downloadCanvas(canvasRef.current, barcodeText);
+            setRecentDownload(true);
+            setDownloadEnabled(false);
+            setTimeout(() => {
+              setRecentDownload(false);
+              setDownloadEnabled(true);
+            }, 500);
+          }
         }}
         disabled={!downloadEnabled}
         variant="outline-success"
@@ -70,29 +74,25 @@ export function BarcodeButtons({
   );
 }
 
-function copyCanvas(canvasRef: RefObject<HTMLCanvasElement>) {
-  if (canvasRef.current) {
-    canvasRef.current.toBlob((blob) => {
-      if (blob) {
-        const item = new ClipboardItem({ "image/png": blob });
-        navigator.clipboard.write([item]);
-      }
-    });
-  }
+function copyCanvas(canvas: HTMLCanvasElement) {
+  canvas.toBlob((blob) => {
+    if (blob) {
+      const item = new ClipboardItem({ "image/png": blob });
+      navigator.clipboard.write([item]);
+    }
+  });
 }
 
 function downloadCanvas(
-  canvasRef: RefObject<HTMLCanvasElement>,
+  canvas: HTMLCanvasElement,
   filename: string
 ) {
-  if (canvasRef.current) {
-    const image = canvasRef.current
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
+  const image = canvas
+    .toDataURL("image/png")
+    .replace("image/png", "image/octet-stream");
 
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = `${filename}.png`;
-    a.click();
-  }
+  const a = document.createElement("a");
+  a.href = image;
+  a.download = `${filename}.png`;
+  a.click();
 }
