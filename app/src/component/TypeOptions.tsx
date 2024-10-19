@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 import { BarcodeType } from "../enum/BarcodeType";
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { MessageLevel } from "../enum/MessageLevel";
+import { Label } from "./Label";
 
 export type CalculateFromBarcodeType = (barcodeType: BarcodeType) => void;
 
@@ -12,6 +14,7 @@ export function TypeOptions({
   onTypeChange: CalculateFromBarcodeType;
 }) {
   let options: ReactElement[] = [];
+  options.push(<Label key="type-label" label="Symbology" level={MessageLevel.Info} />);
   Object.keys(BarcodeType).forEach((k) => {
     const barcodeType: string = BarcodeType[k as keyof typeof BarcodeType];
     options.push(

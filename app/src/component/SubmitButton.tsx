@@ -8,17 +8,19 @@ export function SubmitButton({
   label,
   level,
   onSubmit,
+  disabled,
 }: {
   label: string;
   level: MessageLevel;
   onSubmit: OnSubmitClick;
+  disabled: boolean;
 }) {
   const classColor = levelColor(level);
 
   return (
     <>
       <Button
-        className={`btn-outline-${classColor}${classColor}`}
+        className={`btn-outline-${classColor}${classColor} ${disabled ? "disabled" : ""}`}
         onClick={onSubmit}
       >{label}</Button>
     </>
