@@ -1,17 +1,18 @@
 import { MessageLevel } from "../enum/MessageLevel";
-import { CalculateFromCheckDigit } from "../interface/Calculate";
 import { levelColor } from "../util/Messages/LevelColor";
 
-export function CheckDigitCheckbox({
+export type CheckboxChange = (checkboxChecked: boolean) => void;
+
+export function Checkbox({
   label,
   checked,
   level,
-  onCheckDigitChange,
+  onCheckboxChange: onCheckboxChange,
 }: {
   label: string;
   checked: boolean;
   level: MessageLevel;
-  onCheckDigitChange: CalculateFromCheckDigit;
+  onCheckboxChange: CheckboxChange;
 }) {
   const classColor = levelColor(level);
 
@@ -22,7 +23,7 @@ export function CheckDigitCheckbox({
         type="checkbox"
         className="btn-check"
         checked={checked}
-        onChange={(e) => onCheckDigitChange(e.target.checked)}
+        onChange={(e) => onCheckboxChange(e.target.checked)}
       />
       <label
         className={`btn btn-outline-${classColor} focus-${classColor}`}

@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
-import { CalculateFromBarcodeType } from "../interface/Calculate";
 import { BarcodeType } from "../enum/BarcodeType";
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+
+export type CalculateFromBarcodeType = (barcodeType: BarcodeType) => void;
 
 export function TypeOptions({
   type,

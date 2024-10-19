@@ -2,6 +2,8 @@ import { Form } from "react-bootstrap";
 import { MessageLevel } from "../enum/MessageLevel";
 import { levelColor } from "../util/Messages/LevelColor";
 
+export type InputTextChange = (inputText: string) => void;
+
 export function DataTextInput({
   id,
   inputText,
@@ -11,7 +13,7 @@ export function DataTextInput({
   id: string;
   inputText: string;
   level: MessageLevel;
-  onInputTextChange: (inputText: string) => void;
+  onInputTextChange: InputTextChange;
 }) {
   let classColor = levelColor(level);
 
@@ -25,7 +27,7 @@ export function DataTextInput({
       onChange={(e) => {
         onInputTextChange(e.target.value);
       }}
-      className={`border-${classColor} focus-${classColor}`}
+      className={`data-text border-${classColor} focus-${classColor}`}
     />
   );
 }
