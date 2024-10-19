@@ -85,8 +85,9 @@ export function BarcodeCalculator() {
     reader.readAsText(file);
   };
 
-  const onBulkGenerateClick: OnSubmitClick = async () => {
-    setBulkMessages(await generateBulk(bulkFileContent, barcodeType, luhnBoolean, upcaBoolean));
+  const onBulkGenerateClick: OnSubmitClick = () => {
+    generateBulk(bulkFileContent, barcodeType, luhnBoolean, upcaBoolean)
+      .then(content => setBulkMessages(content));
   };
 
   const barcodeData: CalculatedBarcodeData = useMemo(

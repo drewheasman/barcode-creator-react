@@ -37,7 +37,7 @@ export async function generateBulk(
       messages.push(
         {
           level: MessageLevel.Warn,
-          message: `problem with input "${input}"`
+          message: `Problem with input "${input}"`
         });
       messages.push(...calcResult.messages);
       continue;
@@ -48,7 +48,7 @@ export async function generateBulk(
       messages.push(
         {
           level: MessageLevel.Error,
-          message: `problem rendering input "${input}", "${calcResult}"`
+          message: `Problem rendering input "${input}", "${calcResult}"`
         });
       continue;
     }
@@ -59,6 +59,10 @@ export async function generateBulk(
   }
 
   if (zipFileCount == 0) {
+    messages.unshift({
+      level: MessageLevel.Info,
+      message: "No barcodes encoded"
+    })
     return messages;
   }
 
