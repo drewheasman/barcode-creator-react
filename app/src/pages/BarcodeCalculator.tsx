@@ -14,6 +14,7 @@ import { FileChooser, OnBulkFilenameChange } from "../component/FileChooser";
 import { OnSubmitClick, SubmitButton } from "../component/SubmitButton";
 import { generateBulk } from "../util/GenerateBulk";
 import { Label } from "../component/Label";
+import { Message } from "../interface/Message";
 
 export function BarcodeCalculator() {
   const [barcodeType, setBarcodeType] = useState(BarcodeType.Code128);
@@ -21,7 +22,8 @@ export function BarcodeCalculator() {
   const [upcaBoolean, setUpcaBoolean] = useState(false);
   const [bulkMode, setBulkMode] = useState(false);
   const [inputString, setInputString] = useState("");
-  const [bulkFiles, setBulkFiles] = useState("");
+  const [bulkFileContent, setBulkFileContent] = useState("");
+  const [bulkMessages, setBulkMessages] = useState<Message[]>([]);
 
   const onBarcodeTypeChange: CalculateFromBarcodeType = (
     barcodeType: BarcodeType
@@ -33,6 +35,8 @@ export function BarcodeCalculator() {
     singleModeChecked: boolean
   ) => {
     setBulkMode(!singleModeChecked);
+    setBulkFileContent("");
+    setBulkMessages([]);
   };
 
   const onBulkModeChange: CheckboxChange = (
@@ -75,14 +79,15 @@ export function BarcodeCalculator() {
     reader.onload = (e: ProgressEvent<FileReader>) => {
       if (e.target && typeof e.target.result === 'string') {
         const content = e.target.result;
-        setBulkFiles(content);
+        setBulkFileContent(content);
       }
     };
     reader.readAsText(file);
   };
 
   const onBulkGenerateClick: OnSubmitClick = () => {
-    generateBulk(bulkFiles);
+    generateBulk(bulkFileContent, barcodeType, luhnBoolean, upcaBoolean)
+      .then(content => setBulkMessages(content));
   };
 
   const barcodeData: CalculatedBarcodeData = useMemo(
@@ -117,13 +122,7 @@ export function BarcodeCalculator() {
         </div>
 
         <div className="row overflow-auto py-1">
-          <div className="col col-md input-group">
-            <Label
-              label="Symbology"
-              level={MessageLevel.Info}
-            />
-            <TypeOptions type={barcodeType} onTypeChange={onBarcodeTypeChange} />
-          </div>
+          <TypeOptions type={barcodeType} onTypeChange={onBarcodeTypeChange} />
         </div>
 
         <div className="row py-1">
@@ -161,8 +160,14 @@ export function BarcodeCalculator() {
                   label="Generate"
                   level={MessageLevel.Info}
                   onSubmit={onBulkGenerateClick}
+                  disabled={!(bulkFileContent.length > 0)}
                 />
               </div>
+            </div>
+            <div className="py-1">
+              <CalculateMessages
+                messages={bulkMessages}
+              ></CalculateMessages>
             </div>
           </>)
           : (<>

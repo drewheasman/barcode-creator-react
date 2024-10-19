@@ -6,12 +6,20 @@ import { calculateBarcodeData } from "./Calculate";
 import React from "react";
 import { CalculatedBarcodeData } from "../interface/CalculatedBarcodeData";
 import JSZip from "jszip";
+import { Message } from "../interface/Message";
 
-export async function generateBulk(fileContent: string) {
+export async function generateBulk(
+  fileContent: string,
+  symbology: BarcodeType,
+  luhn: boolean,
+  ucpa: boolean,
+) {
   const inputs = fileContent.split(/,|\n/);
   const zip = new JSZip();
-  const date = new Date().toISOString();
+  const date = new Date().toISOString().substring(0, 19);
   const zipFilename = `barcodes-${date}.zip`;
+  let zipFileCount = 0;
+  const messages: Message[] = [];
 
   for (let input of inputs) {
 
@@ -23,17 +31,39 @@ export async function generateBulk(fileContent: string) {
       input = input.substring(1, input.length - 1);
     }
 
-    const calcResult = calculateBarcodeData(input, false, false, BarcodeType.Code128);
+    const calcResult = calculateBarcodeData(input, luhn, ucpa, symbology);
 
     if (calcResult.inputLevel == MessageLevel.Error) {
-      console.log("problem with this barcode", `"${input}"`, `"${calcResult}"`);
+      messages.push(
+        {
+          level: MessageLevel.Warn,
+          message: `Problem with input "${input}"`
+        });
+      messages.push(...calcResult.messages);
       continue;
     }
 
     const imageData = await renderBarcodeOffScreen(calcResult);
+    if (!imageData) {
+      messages.push(
+        {
+          level: MessageLevel.Error,
+          message: `Problem rendering input "${input}", "${calcResult}"`
+        });
+      continue;
+    }
     const imageBase64 = imageData.split(',')[1];
 
     zip.file(`${calcResult.barcodeText}.png`, imageBase64, { base64: true });
+    zipFileCount++;
+  }
+
+  if (zipFileCount == 0) {
+    messages.unshift({
+      level: MessageLevel.Info,
+      message: "No barcodes encoded"
+    })
+    return messages;
   }
 
   zip.generateAsync({ type: 'blob' }).then(content => {
@@ -43,6 +73,8 @@ export async function generateBulk(fileContent: string) {
     document.body.appendChild(link).click();
     document.body.removeChild(link);
   });
+
+  return messages;
 }
 
 function renderBarcodeOffScreen(data: CalculatedBarcodeData) {
