@@ -105,6 +105,7 @@ export function BarcodeCalculator() {
             <Label
               label="Mode"
               level={MessageLevel.Info}
+              tooltip="Single: input data into the input field. Bulk: upload a comma or new line separated list of input data"
             />
             <Checkbox
               label="Single"
@@ -130,6 +131,7 @@ export function BarcodeCalculator() {
             <Label
               label="Check digit"
               level={MessageLevel.Info}
+              tooltip="Optionally check digit appended to input"
             />
             <Checkbox
               label="Luhn"
