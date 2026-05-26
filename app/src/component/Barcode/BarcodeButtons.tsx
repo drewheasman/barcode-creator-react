@@ -5,7 +5,7 @@ export function BarcodeButtons({
   canvasRef,
   barcodeText,
 }: {
-  canvasRef: RefObject<HTMLCanvasElement>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   barcodeText: string;
 }) {
   const [copyEnabled, setCopyEnabled] = useState(false);

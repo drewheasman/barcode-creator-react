@@ -15,7 +15,7 @@ export function BarcodeImage({
 }: {
   barcodeLinesBits: string;
   barcodeText: string;
-  canvasRef: RefObject<HTMLCanvasElement>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   hidden?: boolean;
 }) {
   const canvasWidth = (barcodeLinesBits.length + xPadding) * barcodeWidth;

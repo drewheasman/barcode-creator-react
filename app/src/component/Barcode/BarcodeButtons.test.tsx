@@ -4,7 +4,7 @@ import React from "react";
 
 describe("BarcodeButtons", () => {
   test("Copy button should be disabled initially when barcodeText is empty", () => {
-    const canvasRef = React.createRef<HTMLCanvasElement>();
+    const canvasRef = React.createRef<HTMLCanvasElement>() as React.RefObject<HTMLCanvasElement | null>;
     render(<BarcodeButtons canvasRef={canvasRef} barcodeText="" />);
 
     const copyButton = screen.getByLabelText("Copy barcode");
@@ -12,7 +12,7 @@ describe("BarcodeButtons", () => {
   });
 
   test("Download button should be disabled initially when barcodeText is empty", () => {
-    const canvasRef = React.createRef<HTMLCanvasElement>();
+    const canvasRef = React.createRef<HTMLCanvasElement>() as React.RefObject<HTMLCanvasElement | null>;
     render(<BarcodeButtons canvasRef={canvasRef} barcodeText="" />);
 
     const downloadButton = screen.getByLabelText("Download barcode");
@@ -20,7 +20,7 @@ describe("BarcodeButtons", () => {
   });
 
   test("Copy button should be enabled when barcodeText is not empty", () => {
-    const canvasRef = { current: null };
+    const canvasRef: React.RefObject<HTMLCanvasElement | null> = { current: null };
     render(<BarcodeButtons canvasRef={canvasRef} barcodeText="12345" />);
 
     const copyButton = screen.getByLabelText("Copy barcode");
@@ -28,7 +28,7 @@ describe("BarcodeButtons", () => {
   });
 
   test("Download button should be enabled when barcodeText is not empty", () => {
-    const canvasRef = { current: null };
+    const canvasRef: React.RefObject<HTMLCanvasElement | null> = { current: null };
     render(<BarcodeButtons canvasRef={canvasRef} barcodeText="12345" />);
 
     const downloadButton = screen.getByLabelText("Download barcode");
