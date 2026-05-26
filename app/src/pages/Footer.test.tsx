@@ -4,14 +4,14 @@ import { MemoryRouter } from "react-router-dom";
 
 describe("Footer", () => {
   it("displays footer content", () => {
-    const { getByText, getByRole } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <Footer />
       </MemoryRouter>
     );
 
     expect(
-      getByText("© 2024 Create Barcodes. All rights reserved.")
+      getByText("© 2026 Create Barcodes. All rights reserved.")
     ).toBeTruthy();
     expect(getByText("Privacy Policy")).toBeTruthy();
   });
