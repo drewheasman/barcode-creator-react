@@ -4,9 +4,11 @@ import { Header } from "./pages/Header";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { Footer } from "./pages/Footer";
 
+const basename = window.location.pathname.startsWith("/barcodes") ? "/barcodes" : undefined;
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Header />
       <main style={{ paddingBottom: "7rem" }}>
         <Routes>

@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: __dirname + "/../dist/",
     filename: "[name].[contenthash].js",
-    publicPath: "/",
+    publicPath: process.env.PUBLIC_PATH || "/",
   },
   module: {
     rules: [

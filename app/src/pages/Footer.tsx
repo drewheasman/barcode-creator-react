@@ -9,7 +9,7 @@ export function Footer() {
           &copy; {new Date().getFullYear()} Create Barcodes. All rights
           reserved.
           <br />
-          <Nav.Link href="/privacy-policy">Privacy Policy</Nav.Link>
+          <Nav.Link as={Link} to="/privacy-policy">Privacy Policy</Nav.Link>
         </Navbar.Text>
       </div>
     </Navbar>

@@ -1,11 +1,12 @@
 import { Container, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export function Header() {
   return (
     <Navbar className="bg-success py-3 px-3">
       <Container className="py-2">
         <h2 className="header-name">
-          <a href="/">Create Barcodes</a>
+          <Link to="/">Create Barcodes</Link>
         </h2>
         <Navbar.Collapse className="justify-content-end">
           {" "}

@@ -8,12 +8,12 @@
 # terraform init -backend-config="bucket=TFSTATE_BUCKET" -backend-config="key=TFSTATE_KEY" -backend-config="region=REGION" -backend-config="profile=PROFILE"
 
 terraform {
-  required_version = "~> 1.5"
+  required_version = "~> 1.15"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.7"
+      version = "~> 6.46"
     }
   }
 
