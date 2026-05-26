@@ -2,6 +2,9 @@
   "name": "react-barcode-app",
   "version": "0.1.0",
   "author": "Drew Heasman",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "start": "webpack serve --config webpack/webpack.config.js --port 3000",
     "build": "NODE_ENV=production webpack --config webpack/webpack.config.js",
