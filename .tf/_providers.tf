@@ -5,7 +5,7 @@
 # TF_AWS_ROLE
 
 # Initialise locally with:
-# terraform init -backend-config="bucket=TFSTATE_BUCKET" -backend-config="key=TFSTATE_KEY" -backend-config="region=REGION" -backend-config="profile=PROFILE"
+# terraform init -backend-config="bucket=$TFSTATE_BUCKET" -backend-config="key=$TFSTATE_KEY" -backend-config="region=$AWS_REGION" -backend-config="profile=$AWS_PROFILE"
 
 terraform {
   required_version = "~> 1.15"
