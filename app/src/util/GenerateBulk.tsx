@@ -82,7 +82,7 @@ function renderBarcodeOffScreen(data: CalculatedBarcodeData) {
   document.body.appendChild(container);
 
   const root = ReactDOM.createRoot(container);
-  const canvasRef = React.createRef<HTMLCanvasElement>();
+  const canvasRef = React.createRef<HTMLCanvasElement>() as React.RefObject<HTMLCanvasElement | null>;
 
   return new Promise<string>((resolve) => {
     root.render(

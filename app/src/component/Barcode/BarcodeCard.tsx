@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { BarcodeImage, barcodeCanvasHeight } from "./BarcodeImage";
 import { BarcodeButtons } from "./BarcodeButtons";
 import { Card } from "react-bootstrap";
@@ -10,7 +10,7 @@ export function BarcodeCard({
   barcodeLinesBits: string;
   barcodeText: string;
 }) {
-  const [canvasRef] = useState(useRef<HTMLCanvasElement>(null));
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   return (
     <Card className="bg-dark">

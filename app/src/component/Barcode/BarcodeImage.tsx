@@ -12,12 +12,12 @@ export function BarcodeImage({
   barcodeText,
   canvasRef,
   hidden = false,
-}: {
+}: Readonly<{
   barcodeLinesBits: string;
   barcodeText: string;
-  canvasRef: RefObject<HTMLCanvasElement>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   hidden?: boolean;
-}) {
+}>) {
   const canvasWidth = (barcodeLinesBits.length + xPadding) * barcodeWidth;
 
   useEffect(() => {
