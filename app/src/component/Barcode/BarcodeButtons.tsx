@@ -4,10 +4,10 @@ import { Button } from "react-bootstrap";
 export function BarcodeButtons({
   canvasRef,
   barcodeText,
-}: {
+}: Readonly<{
   canvasRef: RefObject<HTMLCanvasElement | null>;
   barcodeText: string;
-}) {
+}>) {
   const [copyEnabled, setCopyEnabled] = useState(false);
   const [downloadEnabled, setDownloadEnabled] = useState(false);
   const [recentCopy, setRecentCopy] = useState(false);
