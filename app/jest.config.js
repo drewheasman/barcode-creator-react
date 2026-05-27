@@ -2,5 +2,6 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
   collectCoverageFrom: ["src/**/*.{ts,tsx}"],
-  setupFilesAfterEnv: ["jest-canvas-mock"],
+  setupFiles: ["<rootDir>/src/test-polyfills.ts"],
+  setupFilesAfterEnv: ["jest-canvas-mock", "<rootDir>/src/setupTests.ts"],
 };
